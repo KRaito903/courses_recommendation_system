@@ -7,15 +7,15 @@ import torch.nn.functional as F
 from sklearn.metrics import ndcg_score
 
 from graph_builder import KnowledgeGraphBuilder
-from gcn_recommender import GCNRecommender
-from lightgcn_recommender import LightGCNRecommender
-from graphsage_recommender import GraphSAGERecommender
-from kgat_recommender import KGATRecommender
+from models.gcn import GCNRecommender
+from models.lightgcn import LightGCNRecommender
+from models.graphsage import GraphSAGERecommender
+from models.kgat import KGATRecommender
 
 class CourseRecommendationSystem:
     """Main recommendation system with multiple model support"""
     def __init__(self, data: Dict, model_type: str = 'lightgcn', 
-                 embedding_dim: int = 64, num_layers: int = 3):
+                 embedding_dim: int = 64, num_layers: int = 3, unenrolled_rate: float = 0.0):
         """
         Args:
             data: Course dataset
@@ -27,9 +27,10 @@ class CourseRecommendationSystem:
         self.model_type = model_type.lower()
         self.embedding_dim = embedding_dim
         self.num_layers = num_layers
+        self.unenrolled_rate = unenrolled_rate
         
         # Build graph
-        self.graph_builder = KnowledgeGraphBuilder(data)
+        self.graph_builder = KnowledgeGraphBuilder(data, unenrolled_rate)
         self.graph = self.graph_builder.build_homogeneous_graph()
         
         self.num_students = len(data['students'])
@@ -40,6 +41,11 @@ class CourseRecommendationSystem:
         self.optimizer = torch.optim.Adam(self.model.parameters(), lr=0.001)
         
         # Prepare training data
+        self._prepare_training_data()
+    
+    def update_graph(self, new_graph):
+        """Update the graph with new data while preserving model weights"""
+        self.graph = new_graph
         self._prepare_training_data()
     
     def _build_model(self):
@@ -67,28 +73,41 @@ class CourseRecommendationSystem:
         else:
             raise ValueError(f"Unknown model type: {self.model_type}")
     
-    def _prepare_training_data(self):
-        """Prepare train/test split"""
-        enrollments = self.data['enrollments']
+    def _prepare_training_data(self, test_size: float = 0.2, validation_size: float = 0.1):
+        """Prepare train/validation/test split"""
+        enrollments = [e for e in self.data['enrollments'] if e['is_enrolled'] == 1]
+
+        if self.unenrolled_rate > 0.0:
+            unenrollments = [e for e in self.data['enrollments'] if e['is_enrolled'] == 0]
+            chosen_unenrollments = np.random.choice(unenrollments, size=int(len(unenrollments) * self.unenrolled_rate), replace=False)
+
+            enrollments += list(chosen_unenrollments)
         
-        # Positive samples
-        pos_samples = [(e['student_id'], e['course_id']) for e in enrollments]
+        # Positive samples - convert course IDs to indices
+        pos_samples = [(e['student_id'], self.graph.course_id_to_idx[e['course_id']]) for e in enrollments]
         
         # Create user-item matrix for negative sampling
         self.user_items = defaultdict(set)
         for sid, cid in pos_samples:
             self.user_items[sid].add(cid)
         
-        # Train/test split
-        train_samples, test_samples = train_test_split(
-            pos_samples, test_size=0.2, random_state=42
+        # First split into train and temp (validation + test)
+        train_samples, temp_samples = train_test_split(
+            pos_samples, test_size=(test_size + validation_size), random_state=42
+        )
+        
+        # Split temp into validation and test
+        relative_val_size = validation_size / (test_size + validation_size)
+        val_samples, test_samples = train_test_split(
+            temp_samples, test_size=(1 - relative_val_size), random_state=42
         )
         
         self.train_samples = train_samples
+        self.val_samples = val_samples
         self.test_samples = test_samples
-    
+        
     def _negative_sampling(self, user_ids: List[int], num_neg: int = 1) -> List[Tuple[int, int]]:
-        """Sample negative items for users"""
+        """Sample negative items for users. Uses course indices, not IDs."""
         neg_samples = []
         for uid in user_ids:
             user_pos_items = self.user_items[uid]
@@ -99,11 +118,43 @@ class CourseRecommendationSystem:
                 neg_samples.append((uid, neg_item))
         return neg_samples
     
+    def _compute_loss(self, samples, training=True):
+        """Compute loss for a set of samples"""
+        user_ids = [s[0] for s in samples]
+        pos_items = [s[1] for s in samples]
+        neg_samples = self._negative_sampling(user_ids)
+        neg_items = [s[1] for s in neg_samples]
+        
+        # Convert to tensors
+        users = torch.LongTensor(user_ids)
+        pos_items = torch.LongTensor(pos_items)
+        neg_items = torch.LongTensor(neg_items)
+        
+        # Forward pass
+        if self.model_type in ['lightgcn', 'kgat']:
+            user_emb, item_emb = self.model(self.graph.edge_index)
+        else:
+            embeddings = self.model(self.graph.x, self.graph.edge_index)
+            user_emb = embeddings[:self.num_students]
+            item_emb = embeddings[self.num_students:]
+        
+        pos_scores = torch.sum(user_emb[users] * item_emb[pos_items], dim=1)
+        neg_scores = torch.sum(user_emb[users] * item_emb[neg_items], dim=1)
+        
+        loss = -torch.mean(F.logsigmoid(pos_scores - neg_scores))
+        
+        if training:
+            self.optimizer.zero_grad()
+            loss.backward()
+            self.optimizer.step()
+        
+        return loss.item()
+
     def train_epoch(self, batch_size: int = 256):
-        """Train for one epoch"""
+        """Train for one epoch and return train and validation losses"""
         self.model.train()
-        total_loss = 0
-        num_batches = 0
+        total_train_loss = 0
+        train_batches = 0
         
         # Shuffle training samples
         train_samples = self.train_samples.copy()
@@ -210,8 +261,12 @@ class CourseRecommendationSystem:
         return results
     
     def recommend_courses(self, student_id: int, k: int = 10) -> List[Dict]:
-        """Recommend top-k courses for a student"""
+        """Recommend top-k courses for a student that are at or below their current semester level"""
         self.model.eval()
+        
+        # Get student's current semester
+        student_info = next(s for s in self.data['students'] if s['student_id'] == student_id)
+        student_semester = student_info['semester']
         
         with torch.no_grad():
             if self.model_type in ['lightgcn', 'kgat']:
@@ -229,22 +284,44 @@ class CourseRecommendationSystem:
             enrolled_courses = list(self.user_items[student_id])
             scores[enrolled_courses] = -float('inf')
             
-            # Top-k
-            top_scores, top_k_items = torch.topk(scores, k)
-            top_k_items = top_k_items.cpu().numpy()
+            # Remove courses from higher semesters
+            for course_idx in range(len(scores)):
+                course_id = self.graph.course_idx_to_id[course_idx]
+                course_info = next(c for c in self.data['courses'] if c['course_id'] == course_id)
+                if course_info['semester'] > student_semester:
+                    scores[course_idx] = -float('inf')
+            
+            # Get more recommendations than needed in case some are filtered
+            top_scores, candidate_items = torch.topk(scores, min(k * 2, len(scores)))
+            candidate_items = candidate_items.cpu().numpy()
             top_scores = top_scores.cpu().numpy()
+            
+            # Filter and take only top k valid recommendations
+            valid_items = []
+            valid_scores = []
+            for idx, (item, score) in enumerate(zip(candidate_items, top_scores)):
+                if score > -float('inf') and len(valid_items) < k:
+                    valid_items.append(item)
+                    valid_scores.append(float(score))  # Convert to Python float
+            
+            top_k_items = valid_items
+            top_scores = valid_scores
         
         # Format recommendations
         recommendations = []
-        for idx, (course_id, score) in enumerate(zip(top_k_items, top_scores)):
-            course_info = self.data['courses'][course_id]
+        for idx, (course_idx, score) in enumerate(zip(top_k_items, top_scores)):
+            # Convert course index back to ID
+            course_id = self.graph.course_idx_to_id[course_idx]
+            # Find course info by ID
+            course_info = next(c for c in self.data['courses'] if c['course_id'] == course_id)
             recommendations.append({
                 'rank': idx + 1,
-                'course_id': int(course_id),
+                'course_id': course_id,
                 'course_name': course_info['course_name'],
-                'major_id': course_info['major_id'],
-                'level': course_info['level'],
-                'score': float(score),
-                'credits': course_info['credits']
+                'course_major': course_info['course_major'],
+                'semester': course_info['semester'],
+                'credit': course_info['credit'],
+                'weight': course_info['weight'],
+                'score': float(score)
             })
         return recommendations

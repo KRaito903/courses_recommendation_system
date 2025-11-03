@@ -22,99 +22,107 @@ class CourseDataGenerator:
     def generate_simple_dataset(
         num_students: int = 200,
         num_courses: int = 50,
-        num_majors: int = 5,
+        num_majors: int = 9,
+        course_majors_dict: Dict = {
+                0: [0,0,0,0,0,0,0,0,0],
+                1: [1,1,0,0,0,0,0,0,0],
+                2: [0,0,1,0,0,0,0,0,0],
+                3: [0,0,0,1,0,0,0,0,0],
+                4: [0,0,0,0,1,0,0,0,0],
+                5: [0,0,0,0,0,1,0,0,0],
+                6: [0,0,0,0,0,0,1,0,0],
+                7: [0,0,0,0,0,0,0,1,0],
+                15: [1,1,0,0,0,1,0,0,0],
+                27: [0,0,1,0,0,0,0,1,0]
+            },
+        max_semester: int = 12,
+        semesters_list: list = [1,4,7,10],
+        credits_list: list = [2, 4, 6],
+        credit_scale: int = 6,
+        course_prefixes: list = ['CSC', 'MTH', 'PHY'],
+        gpa_scale: int = 10,
+        weight_values: list = [0.0, 0.25, 0.5, 1.0],
+        enrollment_dict: Dict = {
+            'liked': 1.0,
+            'disliked': -1.0,
+            'will_enroll': 0.5
+            },
         avg_courses_per_student: int = 8
     ) -> Dict:
         """Generate a simple synthetic dataset"""
         np.random.seed(42)
         
-        # Generate courses
-        courses = []
-        course_features = []
-        for i in range(num_courses):
-            major_id = int(i % num_majors)
-            level = int((i // num_majors) % 4 + 1)  # Course level 1-4
-            credits = int(np.random.choice([3, 4]))
-            courses.append({
-                'course_id': int(i),
-                'course_name': f'Course_{i}',
-                'major_id': major_id,
-                'level': level,
-                'credits': credits,
-            })
-            # Feature: [major_onehot, level, credits]
-            major_onehot = [0] * num_majors
-            major_onehot[major_id] = 1
-            course_features.append(major_onehot + [level / 4.0, credits / 4.0])
-        
         # Generate students
         students = []
         student_features = []
         for i in range(num_students):
-            major_id = int(i % num_majors)
-            semester = int(np.random.randint(1, 9))
-            gpa = float(np.random.uniform(2.0, 4.0))
+            student_major = int(i % num_majors)
+            semester = int(np.random.choice(semesters_list))
+            gpa = float(np.random.randint(1, gpa_scale + 1))
+
             students.append({
                 'student_id': int(i),
-                'major_id': major_id,
+                'student_major': student_major,
                 'semester': semester,
                 'gpa': gpa
             })
             # Feature: [major_onehot, semester, gpa]
             major_onehot = [0] * num_majors
-            major_onehot[major_id] = 1
-            student_features.append(major_onehot + [semester / 8.0, gpa / 4.0])
+            major_onehot[student_major] = 1
+            student_features.append(major_onehot + [float(semester) / max_semester, gpa / gpa_scale])
         
+        # Generate courses
+        courses = []
+        course_features = []
+        course_majors = list(course_majors_dict.keys())
+        for i in range(num_courses):
+            course_code = np.random.choice(course_prefixes) + f"{i:05d}"
+            course_major = int(np.random.choice(course_majors))
+            semester = int(np.random.randint(1, max_semester + 1))
+            credit = int(np.random.choice(credits_list))
+            course_weight = list(np.random.choice(weight_values, size=num_majors))
+
+            courses.append({
+                'course_id': int(i),
+                'course_name': f"Course {i}",
+                'course_code': course_code,
+                'course_major': course_major,
+                'semester': semester,
+                'credit': credit,
+                'weight': course_weight
+            })
+            # Feature: [major_onehot, semester, credit, weight]
+            major_onehot = course_majors_dict[course_major]
+            course_features.append(major_onehot + [float(semester) / max_semester, float(credit) / credit_scale] + course_weight)
+
         # Generate enrollments (student-course interactions)
         enrollments = []
         for student in students:
             sid = student['student_id']
-            major_id = student['major_id']
-            semester = student['semester']
+            student_major = student['student_major']
+            student_semester = student['semester']
             
             # Students take courses from their major and prerequisites
-            available_courses = [c for c in courses if c['major_id'] == major_id and c['level'] <= semester // 2 + 1]
+            available_courses = [c for c in courses if c['semester'] <= student_semester]
             num_enrolled = min(avg_courses_per_student, len(available_courses))
-            
-            enrolled_courses = np.random.choice(
-                [c['course_id'] for c in available_courses],
-                size=num_enrolled,
-                replace=False
-            )
-            
+            enrolled_courses = np.random.choice([c['course_id'] for c in available_courses], size=num_enrolled, replace=False)
+            enrollment_list = list(enrollment_dict.keys())
+
             for cid in enrolled_courses:
-                grade = float(np.random.uniform(2.5, 4.0))  # Grade for the course
+                enrollment_type = np.random.choice(enrollment_list)
+                enrollment_weight = float(enrollment_dict[enrollment_type])
                 enrollments.append({
-                    'student_id': int(sid),
-                    'course_id': int(cid),
-                    'grade': grade,
-                    'rating': 1.0  # Binary: enrolled=1
+                    'student_id': sid,
+                    'course_id': cid,
+                    'type': enrollment_type,
+                    'weight': enrollment_weight,
+                    'is_enrolled': 0 if enrollment_type == 'will_enroll' else 1
                 })
-        
-        # Generate course prerequisites
-        prerequisites = []
-        for i in range(num_courses):
-            if courses[i]['level'] > 1:
-                # Find potential prerequisites
-                potential_prereqs = [
-                    c['course_id'] for c in courses 
-                    if c['major_id'] == courses[i]['major_id'] 
-                    and c['level'] < courses[i]['level']
-                ]
-                if potential_prereqs:
-                    num_prereqs = np.random.randint(1, min(3, len(potential_prereqs) + 1))
-                    prereqs = np.random.choice(potential_prereqs, size=num_prereqs, replace=False)
-                    for prereq_id in prereqs:
-                        prerequisites.append({
-                            'course_id': int(i),
-                            'prerequisite_id': int(prereq_id)
-                        })
         
         return {
             'students': students,
             'courses': courses,
             'enrollments': enrollments,
-            'prerequisites': prerequisites,
             'student_features': np.array(student_features, dtype=np.float32),
             'course_features': np.array(course_features, dtype=np.float32)
         }

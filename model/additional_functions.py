@@ -6,109 +6,27 @@ from typing import Dict, List, Optional
 from data_generator import CourseDataGenerator
 from recommendation_system import CourseRecommendationSystem
 
-# ==================== Main Usage Example ====================
-
-def main():
-    """Example usage of the course recommendation system"""
-    
-    print("=" * 60)
-    print("GNN-Based Course Recommendation System")
-    print("=" * 60)
-    
-    # Step 1: Generate dataset
-    print("\n[1] Generating synthetic course dataset...")
-    generator = CourseDataGenerator()
-    data = generator.generate_simple_dataset(
-        num_students=200,
-        num_courses=50,
-        num_majors=5,
-        avg_courses_per_student=8
-    )
-    
-    print(f"  - Students: {len(data['students'])}")
-    print(f"  - Courses: {len(data['courses'])}")
-    print(f"  - Enrollments: {len(data['enrollments'])}")
-    print(f"  - Prerequisites: {len(data['prerequisites'])}")
-    
-    # Save dataset (optional)
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(base_dir, "data\course_data.json")
-
-    # Ensure the directory exists before writing
-    os.makedirs(os.path.dirname(file_path), exist_ok=True)
-
-    generator.save_dataset(data, file_path)
-    print(f"  - Dataset saved to '{file_path}'")
-    
-    # Step 2: Test different models
-    models_to_test = ['lightgcn', 'gcn', 'graphsage', 'kgat']
-    results = {}
-    
-    for model_type in models_to_test:
-        print(f"\n[2] Training {model_type.upper()} model...")
-        
-        # Initialize system
-        rec_system = CourseRecommendationSystem(
-            data, 
-            model_type=model_type,
-            embedding_dim=64,
-            num_layers=3
-        )
-        
-        # Training
-        num_epochs = 50
-        for epoch in range(num_epochs):
-            loss = rec_system.train_epoch(batch_size=256)
-            
-            if (epoch + 1) % 10 == 0:
-                metrics = rec_system.evaluate(k=10)
-                print(f"  Epoch {epoch+1}/{num_epochs} - Loss: {loss:.4f} - "
-                      f"P@10: {metrics['precision@k']:.4f} - "
-                      f"R@10: {metrics['recall@k']:.4f} - "
-                      f"NDCG@10: {metrics['ndcg@k']:.4f}")
-        
-        # Final evaluation
-        final_metrics = rec_system.evaluate(k=10)
-        results[model_type] = final_metrics
-        
-        # Step 3: Generate recommendations for a sample student
-        if model_type == 'lightgcn':  # Show example for one model
-            print(f"\n[3] Sample Recommendations ({model_type.upper()}):")
-            student_id = 0
-            student_info = data['students'][student_id]
-            print(f"\n  Student {student_id}:")
-            print(f"    Major: {student_info['major_id']}, Semester: {student_info['semester']}, GPA: {student_info['gpa']:.2f}")
-            
-            recommendations = rec_system.recommend_courses(student_id, k=10)
-            print(f"\n  Top 10 Recommended Courses:")
-            for rec in recommendations:
-                print(f"    {rec['rank']}. {rec['course_name']} (Level {rec['level']}, "
-                      f"Major {rec['major_id']}, Score: {rec['score']:.4f})")
-    
-    # Step 4: Compare models
-    print("\n" + "=" * 60)
-    print("[4] Model Comparison Results:")
-    print("=" * 60)
-    print(f"{'Model':<15} {'Precision@10':<15} {'Recall@10':<15} {'NDCG@10':<15}")
-    print("-" * 60)
-    for model_type, metrics in results.items():
-        print(f"{model_type.upper():<15} {metrics['precision@k']:<15.4f} "
-              f"{metrics['recall@k']:<15.4f} {metrics['ndcg@k']:<15.4f}")
-    
-    print("\n" + "=" * 60)
-    print("System ready for deployment!")
-    print("You can now:")
-    print("  - Load custom datasets using CourseDataGenerator.load_dataset()")
-    print("  - Change models by specifying model_type parameter")
-    print("  - Generate recommendations using recommend_courses()")
-    print("=" * 60)
-
-
-if __name__ == "__main__":
-    main()
-
-
 # ==================== Additional Utilities ====================
+
+class UpdateMonitor:
+    def __init__(self, initial_enrollments):
+        self.initial_enrollment_count = len(initial_enrollments)
+        self.new_enrollments_count = 0
+        self.retrain_threshold = 0.15  # 15% of initial enrollments
+        
+    def add_enrollments(self, new_enrollments):
+        """Track new enrollments and return True if retraining is recommended"""
+        self.new_enrollments_count += len(new_enrollments)
+        return self.should_retrain()
+    
+    def should_retrain(self):
+        """Check if retraining is recommended based on the number of new enrollments"""
+        return (self.new_enrollments_count / self.initial_enrollment_count) >= self.retrain_threshold
+    
+    def reset(self):
+        """Reset the counter after retraining"""
+        self.initial_enrollment_count += self.new_enrollments_count
+        self.new_enrollments_count = 0
 
 class DatasetLoader:
     """Load various dataset formats"""
@@ -636,10 +554,11 @@ def quick_start_guide():
 
 if __name__ == "__main__":
     # Run main demo
-    main()
+    # main()
     
     # Uncomment to see custom dataset example
     # example_custom_dataset()
     
     # Uncomment to see quick start guide
     # quick_start_guide()
+    pass
