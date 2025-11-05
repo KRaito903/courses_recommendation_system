@@ -1,0 +1,119 @@
+/* Auth Page Styles */
+.auth-container {
+  max-width: 450px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.auth-card {
+  background-color: var(--bg-white);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.auth-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--text-dark);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.auth-input-group {
+  margin-bottom: 0.5rem;
+}
+
+.auth-input-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  background-color: var(--bg-white);
+  color: var(--text-dark);
+  transition: all 0.2s;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+.auth-submit-btn {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.auth-toggle {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.auth-toggle-btn {
+  background: none;
+  color: var(--primary-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: underline;
+}
+
+.auth-toggle-btn:hover {
+  color: var(--primary-hover);
+  background-color: transparent;
+  transform: none;
+  box-shadow: none;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.auth-divider span {
+  padding: 0 1rem;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 576px) {
+  .auth-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .auth-title {
+    font-size: 1.75rem;
+  }
+}
