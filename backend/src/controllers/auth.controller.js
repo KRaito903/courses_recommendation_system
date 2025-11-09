@@ -1,5 +1,6 @@
 // src/controllers/auth.controller.js
 import { db } from '../config/firebase.config.js';
+import { getStudnetByStudentCode, createStudent } from '../services/student.service.js';
 
 export const registerProfile = async (req, res) => {
     try {
@@ -27,33 +28,57 @@ export const registerProfile = async (req, res) => {
         }
         
         // 4. Kiểm tra xem student_code có tồn tại trong collection students không
-        const studentRef = db.collection('students').doc(student_code);
-        const studentDoc = await studentRef.get();
-        
+        const studentDoc = await getStudnetByStudentCode(student_code);
+
+        // neu khong ton tai thi tao moi student
         if (!studentDoc.exists) {
-            return res.status(404).send({ 
-                message: `MSSV ${student_code} không tồn tại trong hệ thống.` 
+            const newStudentData = {
+                student_code: student_code,
+                name: displayName,
+                gpa: null,
+                semester: null,
+                student_major_code: null,
+                image_url: null,
+            };
+
+            const createdStudent =  await createStudent(newStudentData);
+            console.log('✅ Tạo mới student cho MSSV không tồn tại:', createdStudent);
+
+            await userRef.set({
+                email: email,   
+                displayName: displayName,
+                student_code: student_code,  // Reference to students collection
+                student_ref: createdStudent.student_id,      // Firestore document reference
+                emailVerified: email_verified, // Sẽ là 'true'
+                createdAt: new Date().toISOString()
             });
-        }
+
+            console.log(`✅ Profile mới được tạo cho user ${uid}`);
+            console.log(`🔗 Đã link user ${uid} với student ${student_code}`);
+            res.status(201).send({
+                message: 'Tạo hồ sơ thành công!',
+                uid: uid,
+                email: email,
+                displayName: displayName,
+                student_code: student_code,
+                emailVerified: email_verified,
+                createdAt: new Date().toISOString()
+            });
+            return;
+         }
 
         // 5. Tạo "trường mẫu" (profile) trong Firestore với reference
         const userProfile = {
             email: email,   
             displayName: displayName,
             student_code: student_code,  // Reference to students collection
-            student_ref: studentRef,      // Firestore document reference
+            student_ref: studentDoc.student_id,      // Firestore document reference
             emailVerified: email_verified, // Sẽ là 'true'
             createdAt: new Date().toISOString()
         };
 
         // Ghi vào collection 'users' với ID là uid
         await userRef.set(userProfile);
-        
-        // 6. Cập nhật student document với user_uid
-        await studentRef.update({
-            user_uid: uid,  // Link back to users collection
-            linkedAt: new Date().toISOString()
-        });
 
         console.log(`✅ Profile mới được tạo cho user ${uid}`);
         console.log(`🔗 Đã link user ${uid} với student ${student_code}`);

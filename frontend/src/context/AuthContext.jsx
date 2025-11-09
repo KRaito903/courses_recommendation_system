@@ -8,6 +8,7 @@ import {
     signOut,
     sendEmailVerification
 } from 'firebase/auth';
+// intentionally avoid useNavigate here because AuthProvider may be mounted outside a Router
 // Import service gọi API backend
 import * as profileService from '../services/profileService.js';
 
@@ -27,6 +28,7 @@ export const AuthProvider = ({ children }) => {
     // Hàm đăng ký - CHỈ tạo Firebase Auth user, KHÔNG tạo profile ngay
     const register = async (email, password, student_code, displayName) => {
         try {
+            console.log("dang ky")
             // Bước 1: Tạo user ở Firebase Auth (Client)
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             
@@ -42,6 +44,8 @@ export const AuthProvider = ({ children }) => {
             
             alert("Đăng ký thành công! Vui lòng kiểm tra email để xác thực tài khoản.\n\nSau khi xác thực, hãy đăng nhập lại để hoàn tất.");
             
+            setCurrentUser(userCredential.user);
+
             return userCredential;
         } catch (error) {
             console.error("❌ Lỗi khi đăng ký:", error);
@@ -87,13 +91,14 @@ export const AuthProvider = ({ children }) => {
             
             // Lấy token
             const token = await targetUser.getIdToken();
-            
+
+             // Xóa pending data sau khi tạo thành công
+            localStorage.removeItem(`pendingProfile_${targetUser.uid}`);
+
             // Gọi API tạo profile
             console.log('📝 Đang tạo profile trong Firestore...');
             await profileService.createProfile(token, profileData);
             
-            // Xóa pending data sau khi tạo thành công
-            localStorage.removeItem(`pendingProfile_${targetUser.uid}`);
             
             console.log('✅ Profile đã được tạo thành công!');
             alert('🎉 Chào mừng! Tài khoản của bạn đã được kích hoạt.');
@@ -117,31 +122,39 @@ export const AuthProvider = ({ children }) => {
     // Hàm đăng nhập
     const login = async (email, password) => {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        
-        // QUAN TRỌNG: Reload user để lấy trạng thái emailVerified mới nhất
+
+        // Reload user để lấy trạng thái emailVerified mới nhất
         await userCredential.user.reload();
-        
+
         console.log('🔄 User reloaded. EmailVerified:', userCredential.user.emailVerified);
-        
-        // Sau khi đăng nhập thành công, check và tạo profile nếu cần
-        if (userCredential.user.emailVerified) {
-            // Đợi một chút để đảm bảo auth state được cập nhật
-            setTimeout(async () => {
+
+        // Nếu email chưa verify: sign out ngay, clear currentUser và chuyển về trang auth
+            if (!userCredential.user.emailVerified) {
+                console.log('⚠️ Email chưa được xác thực. Đăng xuất và chuyển về trang Auth.');
                 try {
-                    const freshUser = auth.currentUser;
-                    if (freshUser) {
-                        await freshUser.reload();
-                        await createUserProfile(freshUser);
-                    }
+                    await signOut(auth);
                 } catch (err) {
-                    console.error('Error creating profile after login:', err);
+                    console.error('Lỗi khi signOut unverified user:', err);
                 }
-            }, 1000);
-        } else {
-            console.log('⚠️ Email chưa được xác thực. Vui lòng kiểm tra email và đăng nhập lại.');
-            alert('⚠️ Email chưa được xác thực.\n\nVui lòng kiểm tra hộp thư đến (hoặc spam) và click vào link xác thực, sau đó đăng nhập lại.');
-        }
-        
+                alert('⚠️ Email chưa được xác thực.\n\nVui lòng kiểm tra hộp thư đến (hoặc spam) và click vào link xác thực, sau đó đăng nhập lại.');
+                // use window.location to redirect because AuthProvider may be mounted outside Router
+                window.location.href = '/auth';
+                throw new Error('Email not verified');
+            }
+
+        // Nếu verified, chờ một chút rồi gọi tạo profile nếu cần
+        setTimeout(async () => {
+            try {
+                const freshUser = auth.currentUser;
+                if (freshUser) {
+                    await freshUser.reload();
+                    await createUserProfile(freshUser);
+                }
+            } catch (err) {
+                console.error('Error creating profile after login:', err);
+            }
+        }, 800);
+
         return userCredential;
     };
 
@@ -152,23 +165,31 @@ export const AuthProvider = ({ children }) => {
 
     // Theo dõi trạng thái đăng nhập
     useEffect(() => {
+        console.log('🔔 Setting up onAuthStateChanged listener');
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
+            console.log('🔔 onAuthStateChanged triggered. User:', user);
             if (user) {
-                // Reload user để đảm bảo có trạng thái emailVerified mới nhất
                 try {
+                    // Reload to get latest emailVerified
                     await user.reload();
-                    // Get fresh user data sau khi reload
                     const freshUser = auth.currentUser;
-                    setCurrentUser(freshUser);
-                    
-                    console.log('👤 User loaded. EmailVerified:', freshUser?.emailVerified);
-                    
-                    // Nếu user đã verify email và có pending profile, tạo profile
-                    if (freshUser && freshUser.emailVerified) {
+                    // Nếu chưa verify -> sign out và redirect về /auth
+                    if (!freshUser?.emailVerified) {
+                        console.log('⚠️ User tồn tại nhưng chưa verify. Sign out và redirect.');
+                        try {
+                            await signOut(auth);
+                        } catch (err) {
+                            console.error('Lỗi khi signOut unverified user onAuthStateChanged:', err);
+                        }
+                    } else {
+                        // Verified -> set session
+                        setCurrentUser(freshUser);
+                        console.log('👤 Verified user loaded. EmailVerified:', freshUser.emailVerified);
+
+                        // Nếu có pending profile -> tạo
                         const pendingDataStr = localStorage.getItem(`pendingProfile_${freshUser.uid}`);
                         if (pendingDataStr) {
                             console.log('🔄 Phát hiện pending profile, đang tạo...');
-                            // Delay nhỏ để đảm bảo currentUser đã được set
                             setTimeout(async () => {
                                 try {
                                     await createUserProfile(freshUser);
@@ -180,12 +201,13 @@ export const AuthProvider = ({ children }) => {
                     }
                 } catch (error) {
                     console.error('Error reloading user:', error);
-                    setCurrentUser(user);
+                    setCurrentUser(null);
                 }
             } else {
+                console.log('👤 No user logged in');
                 setCurrentUser(null);
             }
-            
+
             setLoading(false);
         });
         return unsubscribe;

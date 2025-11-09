@@ -22,7 +22,6 @@ const AuthPage = () => {
         e.preventDefault();
         setError('');
         setLoading(true);
-        
         try {
             if (isLogin) {
                 // Xử lý Login

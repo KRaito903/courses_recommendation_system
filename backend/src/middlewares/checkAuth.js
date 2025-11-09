@@ -9,7 +9,6 @@ export const checkAuth = async (req, res, next) => {
     }
 
     const idToken = authHeader.split('Bearer ')[1];
-
     try {
         // 2. Xác thực token với Firebase Admin
         const decodedToken = await admin.auth().verifyIdToken(idToken);
@@ -19,9 +18,9 @@ export const checkAuth = async (req, res, next) => {
             return res.status(403).send({ message: 'Truy cập bị cấm. Vui lòng xác thực email của bạn trước.' });
         }
 
+        
         // 4. Gắn thông tin user vào request để controller xử lý
         req.user = decodedToken; // Chứa uid, email, ...
-
         // 5. Cho phép request đi tiếp
         next(); 
     } catch (error) {

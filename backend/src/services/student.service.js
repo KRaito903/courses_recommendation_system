@@ -6,11 +6,21 @@ const studentCollection = db.collection('students');
 // Create new student
 const createStudent = async (studentData) => {
     try {
-        const student_id = studentData.student_id.toString();
+        let student_id = studentData.student_id;
         if (!student_id) {
-            throw new Error('student_id is required');
+            const snapshot = await studentCollection.get();
+            let maxId = 0;
+            snapshot.forEach(doc => {
+                const candidate = doc.id;
+                const n = parseInt(candidate, 10);
+                if (!isNaN(n) && n > maxId) maxId = n;
+            });
+            const newId = maxId + 1;
+            studentData.student_id = newId;
+            student_id = newId;
+            console.log(`ℹ️ Auto-generated student_id: ${newId}`);
         }
-        const studentRef = studentCollection.doc(student_id);
+        const studentRef = studentCollection.doc(student_id.toString());
         await studentRef.set(studentData);
         console.log(`✅ Student with ID ${student_id} created successfully.`);
         return { id: studentRef.id, ...studentData };
@@ -59,6 +69,21 @@ const getStudentById = async (student_id) => {
     }
 };
 
+// get student by student code
+const getStudnetByStudentCode = async (student_code) => {
+    try {
+        const querySnapshot = await studentCollection.where('student_code', '==', student_code).get();
+        if (querySnapshot.empty) {
+           return { exists: false}
+        }
+        // Assuming student_code is unique, return the first matching document
+        const doc = querySnapshot.docs[0];
+        return { exists: true , ...doc.data() };
+    } catch (error) {
+        throw new Error('Error getting student by code: ' + error.message);
+    }
+
+};
 // get all students
 const getAllStudents = async () => {
     try {
@@ -102,4 +127,4 @@ const deleteStudentById = async (student_id) => {
     }
 };
 
-export { createStudent, getStudentById, updateStudentById, deleteStudentById , getAllStudents, createMultipleStudents };
+export { createStudent, getStudentById, updateStudentById, deleteStudentById , getAllStudents, createMultipleStudents, getStudnetByStudentCode };
