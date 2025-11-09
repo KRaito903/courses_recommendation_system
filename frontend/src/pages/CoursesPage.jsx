@@ -91,7 +91,7 @@ const CoursesPage = () => {
             const token = await currentUser.getIdToken();
             const newEnrollment = await courseService.createEnrollment(
                 token,
-                student.student_id,
+                student.student.id,
                 Number(formData.course_id),
                 formData.type
             );
@@ -99,7 +99,7 @@ const CoursesPage = () => {
             console.log('✅ Enrollment created:', newEnrollment);
 
             // Refresh courses list
-            const updatedCourses = await courseService.getStudentCourses(token, student.student_id);
+            const updatedCourses = await courseService.getStudentCourses(token, student.student.id);
             const validCourses = updatedCourses.filter(course => course && course.course_id !== undefined);
             setCourses(validCourses);
 
@@ -129,7 +129,7 @@ const CoursesPage = () => {
             const token = await currentUser.getIdToken();
             const updatedEnrollment = await courseService.updateEnrollment(
                 token,
-                student.student_id,
+                student.student.id,
                 selectedCourse.course_id,
                 editType
             );
@@ -137,7 +137,7 @@ const CoursesPage = () => {
             console.log('✅ Enrollment updated:', updatedEnrollment);
 
             // Refresh courses list
-            const updatedCourses = await courseService.getStudentCourses(token, student.student_id);
+            const updatedCourses = await courseService.getStudentCourses(token, student.student.id);
             const validCourses = updatedCourses.filter(course => course && course.course_id !== undefined);
             setCourses(validCourses);
 
@@ -167,14 +167,14 @@ const CoursesPage = () => {
             const token = await currentUser.getIdToken();
             await courseService.deleteEnrollment(
                 token,
-                student.student_id,
+                student.student.id,
                 selectedCourse.course_id
             );
 
             console.log('✅ Course deleted');
 
             // Refresh courses list
-            const updatedCourses = await courseService.getStudentCourses(token, student.student_id);
+            const updatedCourses = await courseService.getStudentCourses(token, student.student.id);
             const validCourses = updatedCourses.filter(course => course && course.course_id !== undefined);
             setCourses(validCourses);
 

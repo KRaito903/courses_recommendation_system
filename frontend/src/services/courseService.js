@@ -38,6 +38,7 @@ export const getStudentCourses = async (token, student_id) => {
  */
 export const createEnrollment = async (token, student_id, course_id, type = 'neutral') => {
     try {
+        console.log(`📝 Creating enrollment for student ${student_id} and course ${course_id} with type ${type}...`);
         if (!token || !student_id || course_id === undefined) {
             throw new Error('Token, student_id, and course_id are required');
         }
