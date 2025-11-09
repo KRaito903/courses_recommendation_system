@@ -24,11 +24,11 @@ export const createProfile = async (token, profileData) => {
  * Lấy thông tin profile của user hiện tại
  * Gọi API: GET /api/students/:id
  * @param {string} token - Firebase ID Token
- * @param {string} studentId - MSSV của sinh viên
  */
-export const getProfile = async (token, studentId) => {
+export const getProfile = async (token) => {
     try {
-        const response = await get(`/students/${studentId}`, token);
+        const response = await get(`/auth/user`, token);
+        console.log('✅ Profile fetched successfully:', response);
         return response;
     } catch (error) {
         console.error('❌ Error fetching profile:', error.message);

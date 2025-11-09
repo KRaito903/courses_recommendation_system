@@ -1,6 +1,7 @@
 // src/api/auth.routes.js
 import { Router } from 'express';
 import * as authController from '../controllers/auth.controller.js';
+import { getUser } from '../controllers/user.controller.js';
 
 // Import middleware
 import { checkAuth } from '../middlewares/checkAuth.js';
@@ -13,10 +14,8 @@ const router = Router();
 // 2. 'authController.registerProfile' chạy sau
 router.post('/register-profile', checkAuth, authController.registerProfile);
 
-// Chúng ta không cần route /register (nhận password) nữa
-// vì việc đó do Client xử lý.
 
-// Route /login cũng không cần thiết ở backend,
-// vì Client tự đăng nhập và lấy Token.
+// user
 
+router.get('/user', checkAuth, getUser);
 export default router;

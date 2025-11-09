@@ -70,6 +70,7 @@ class EnrollmentController {
         try {
             const student_id = req.params.student_id;
             const courses = await getCoursesOfStudent(student_id);
+            console.log('Courses fetched for student_id in controller:', courses);
             res.status(200).json(courses);
         }
         catch (error) {
