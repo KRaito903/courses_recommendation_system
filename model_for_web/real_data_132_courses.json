@@ -1,0 +1,2510 @@
+[
+    {
+        "course_id": 1,
+        "course_code": "CSC00004",
+        "course_name": "Nhập môn Công nghệ thông tin",
+        "course_major_code": "Cơ sở ngành",
+        "semester": 1,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 2,
+        "course_code": "CSC10012",
+        "course_name": "Cơ sở lập trình",
+        "course_major_code": "Cơ sở ngành",
+        "semester": 1,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 3,
+        "course_code": "MTH00009",
+        "course_name": "Toán rời rạc",
+        "course_major_code": "Đại cương",
+        "semester": 1,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 4,
+        "course_code": "CSC10009",
+        "course_name": "Hệ thống máy tính",
+        "course_major_code": "Cơ sở ngành",
+        "semester": 4,
+        "credit": 2,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 5,
+        "course_code": "CSC10008",
+        "course_name": "Mạng máy tính",
+        "course_major_code": "Cơ sở ngành",
+        "semester": 4,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 6,
+        "course_code": "CSC10014",
+        "course_name": "Tư duy tính toán",
+        "course_major_code": "Cơ sở ngành",
+        "semester": 4,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 7,
+        "course_code": "MTH00006",
+        "course_name": "Vi tích phân 2",
+        "course_major_code": "Đại cương",
+        "semester": 4,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 8,
+        "course_code": "PHY00007",
+        "course_name": "Vật lý cho Công nghệ thông tin",
+        "course_major_code": "Đại cương",
+        "semester": 7,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 9,
+        "course_code": "CSC11004",
+        "course_name": "Mạng máy tính nâng cao",
+        "course_major_code": "MMT hướng ATTT",
+        "semester": 7,
+        "credit": 4,
+        "weight": [
+            1.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+        ]
+    },
+    {
+        "course_id": 10,
+        "course_code": "CSC13002",
+        "course_name": "Nhập môn công nghệ phần mềm",
+        "course_major_code": "Cơ sở ngành",
+        "semester": 7,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 11,
+        "course_code": "CSC15005",
+        "course_name": "Nhập môn mã hóa – mật mã",
+        "course_major_code": "CNTThuc",
+        "semester": 7,
+        "credit": 4,
+        "weight": [
+            1.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            1.0
+        ]
+    },
+    {
+        "course_id": 12,
+        "course_code": "CSC15006",
+        "course_name": "Nhập môn xử lý ngôn ngữ tự nhiên",
+        "course_major_code": "CNTThuc",
+        "semester": 7,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            0.0,
+            0.0,
+            1.0
+        ]
+    },
+    {
+        "course_id": 13,
+        "course_code": "CSC12002",
+        "course_name": "Cơ sở dữ liệu nâng cao",
+        "course_major_code": "HTTT",
+        "semester": 7,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+        ]
+    },
+    {
+        "course_id": 14,
+        "course_code": "CSC12003",
+        "course_name": "Hệ quản trị cơ sở dữ liệu",
+        "course_major_code": "HTTT",
+        "semester": 7,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 15,
+        "course_code": "CSC12109",
+        "course_name": "Hệ thống thông tin doanh nghiệp",
+        "course_major_code": "HTTT",
+        "semester": 7,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 16,
+        "course_code": "CSC14119",
+        "course_name": "Nhập môn khoa học dữ liệu",
+        "course_major_code": "KHDL",
+        "semester": 7,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            1.0,
+            1.0
+        ]
+    },
+    {
+        "course_id": 17,
+        "course_code": "CSC17104",
+        "course_name": "Lập trình cho khoa học dữ liệu",
+        "course_major_code": "KHDL",
+        "semester": 7,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 18,
+        "course_code": "CSC14004",
+        "course_name": "Khai thác dữ liệu và ứng dụng",
+        "course_major_code": "KHMT hướng TTNT",
+        "semester": 7,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0
+        ]
+    },
+    {
+        "course_id": 19,
+        "course_code": "CSC14005",
+        "course_name": "Nhập môn học máy",
+        "course_major_code": "KHMT hướng TTNT",
+        "semester": 7,
+        "credit": 4,
+        "weight": [
+            0.5,
+            0.5,
+            0.0,
+            0.5,
+            1.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0
+        ]
+    },
+    {
+        "course_id": 20,
+        "course_code": "CSC14008",
+        "course_name": "Phương pháp nghiên cứu khoa học",
+        "course_major_code": "KHMT hướng TTNT",
+        "semester": 7,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 21,
+        "course_code": "CSC13008",
+        "course_name": "Phát triển ứng dụng web",
+        "course_major_code": "KTPM",
+        "semester": 7,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 22,
+        "course_code": "CSC13102",
+        "course_name": "Lập trình ứng dụng Java",
+        "course_major_code": "KTPM",
+        "semester": 7,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 23,
+        "course_code": "CSC16001",
+        "course_name": "Đồ họa máy tính",
+        "course_major_code": "TGMT",
+        "semester": 7,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 24,
+        "course_code": "CSC16005",
+        "course_name": "Xử lý ảnh số và video số",
+        "course_major_code": "TGMT",
+        "semester": 7,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            1.0,
+            0.0,
+            1.0
+        ]
+    },
+    {
+        "course_id": 25,
+        "course_code": "CSC15104",
+        "course_name": "An toàn và phục hồi dữ liệu",
+        "course_major_code": "CNTThuc",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.25,
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.0,
+            0.25
+        ]
+    },
+    {
+        "course_id": 26,
+        "course_code": "CSC15106",
+        "course_name": "Seminar Công nghệ tri thức",
+        "course_major_code": "CNTThuc",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.0,
+            0.25
+        ]
+    },
+    {
+        "course_id": 27,
+        "course_code": "CSC12005",
+        "course_name": "Phát triển ứng dụng hệ thống thông tin hiện đại",
+        "course_major_code": "HTTT",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 28,
+        "course_code": "CSC12107",
+        "course_name": "Hệ thống thông tin phục vụ trí tuệ kinh doanh",
+        "course_major_code": "HTTT",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25
+        ]
+    },
+    {
+        "course_id": 29,
+        "course_code": "CSC12110",
+        "course_name": "Phân tích dữ liệu ứng dụng",
+        "course_major_code": "HTTT",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 30,
+        "course_code": "CSC17106",
+        "course_name": "Xử lý phân tích dữ liệu trực tuyến",
+        "course_major_code": "HTTT/KHDL",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0
+        ]
+    },
+    {
+        "course_id": 31,
+        "course_code": "CSC14117",
+        "course_name": "Nhập môn lập trình kết nối vạn vật",
+        "course_major_code": "KHDL",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.25,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.5
+        ]
+    },
+    {
+        "course_id": 32,
+        "course_code": "CSC17001",
+        "course_name": "Phân tích dữ liệu thông minh",
+        "course_major_code": "KHDL",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            1.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 33,
+        "course_code": "CSC14002",
+        "course_name": "Các hệ cơ sở tri thức",
+        "course_major_code": "KHMT hướng TTNT",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 34,
+        "course_code": "CSC14112",
+        "course_name": "Sinh trắc học",
+        "course_major_code": "KHMT hướng TTNT",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 35,
+        "course_code": "CSC14120",
+        "course_name": "Lập trình song song",
+        "course_major_code": "KHMT hướng TTNT",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            1.0,
+            0.5,
+            0.0,
+            0.5,
+            0.5
+        ]
+    },
+    {
+        "course_id": 36,
+        "course_code": "CSC13007",
+        "course_name": "Phát triển game",
+        "course_major_code": "KTPM",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 37,
+        "course_code": "CSC13107",
+        "course_name": "Mẫu thiết kế hướng đối tượng và ứng dụng",
+        "course_major_code": "KTPM",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 38,
+        "course_code": "CSC13114",
+        "course_name": "Phát triển ứng dụng web nâng cao",
+        "course_major_code": "KTPM",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25
+        ]
+    },
+    {
+        "course_id": 39,
+        "course_code": "CSC11115",
+        "course_name": "An ninh mạng",
+        "course_major_code": "MMT hướng ATTT",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 40,
+        "course_code": "CSC11116",
+        "course_name": "DevOps nâng cao",
+        "course_major_code": "MMT hướng ATTT",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 41,
+        "course_code": "CSC15010",
+        "course_name": "Blockchain và ứng dụng",
+        "course_major_code": "MMT hướng ATTT/CNTThuc",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.25,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 42,
+        "course_code": "CSC11112",
+        "course_name": "Chuyên đề hệ thống phân tán",
+        "course_major_code": "MMT hướng ATTT",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.25,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25
+        ]
+    },
+    {
+        "course_id": 43,
+        "course_code": "CSC16002",
+        "course_name": "Phương pháp toán trong phân tích dữ liệu thị giác",
+        "course_major_code": "TGMT",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 44,
+        "course_code": "CSC16102",
+        "course_name": "Kỹ thuật lập trình xử lý ảnh số và video số",
+        "course_major_code": "TGMT",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 45,
+        "course_code": "CSC16114",
+        "course_name": "Học sâu trong thị giác máy tính",
+        "course_major_code": "TGMT",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 46,
+        "course_code": "CSC16110",
+        "course_name": "Chuyên đề Đồ họa máy tính",
+        "course_major_code": "TGMT",
+        "semester": 10,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.25
+        ]
+    },
+    {
+        "course_id": 47,
+        "course_code": "CSC10004",
+        "course_name": "Cấu trúc dữ liệu và giải thuật",
+        "course_major_code": "Cơ sở ngành",
+        "semester": 2,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 48,
+        "course_code": "MTH00058",
+        "course_name": "Toán học tổ hợp",
+        "course_major_code": "Đại cương",
+        "semester": 2,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 49,
+        "course_code": "PHY00005",
+        "course_name": "Vật lý đại cương 1",
+        "course_major_code": "Đại cương",
+        "semester": 2,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 50,
+        "course_code": "CSC10012",
+        "course_name": "Cơ sở lập trình (mở lại)",
+        "course_major_code": "Cơ sở ngành",
+        "semester": 2,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 51,
+        "course_code": "CSC10006",
+        "course_name": "Cơ sở dữ liệu",
+        "course_major_code": "Cơ sở ngành",
+        "semester": 5,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 52,
+        "course_code": "CSC10007",
+        "course_name": "Hệ điều hành",
+        "course_major_code": "Cơ sở ngành",
+        "semester": 5,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 53,
+        "course_code": "CSC14003",
+        "course_name": "Cơ sở trí tuệ nhân tạo",
+        "course_major_code": "Cơ sở ngành",
+        "semester": 5,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 54,
+        "course_code": "MTH00007",
+        "course_name": "Xác suất thống kê",
+        "course_major_code": "Đại cương",
+        "semester": 5,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 55,
+        "course_code": "CSC15002",
+        "course_name": "Bảo mật cơ sở dữ liệu",
+        "course_major_code": "MMT hướng ATTT",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.5,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 56,
+        "course_code": "CSC15003",
+        "course_name": "Mã hóa ứng dụng",
+        "course_major_code": "MMT hướng ATTT",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.5,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            1.0
+        ]
+    },
+    {
+        "course_id": 57,
+        "course_code": "CSC12001",
+        "course_name": "An toàn và bảo mật dữ liệu trong hệ thống thông tin",
+        "course_major_code": "HTTT",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.5,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 58,
+        "course_code": "CSC12004",
+        "course_name": "Phân tích thiết kế hệ thống thông tin",
+        "course_major_code": "HTTT",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+        ]
+    },
+    {
+        "course_id": 59,
+        "course_code": "CSC12103",
+        "course_name": "Chuyên đề Hệ quản trị cơ sở dữ liệu nâng cao",
+        "course_major_code": "HTTT",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 60,
+        "course_code": "CSC10108",
+        "course_name": "Trực quan hóa dữ liệu",
+        "course_major_code": "KHDL/HTTT",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            1.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 61,
+        "course_code": "CSC14004",
+        "course_name": "Khai thác dữ liệu và ứng dụng",
+        "course_major_code": "KHDL",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0
+        ]
+    },
+    {
+        "course_id": 62,
+        "course_code": "CSC14005",
+        "course_name": "Nhập môn học máy",
+        "course_major_code": "KHDL",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.5,
+            0.5,
+            0.0,
+            0.5,
+            1.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0
+        ]
+    },
+    {
+        "course_id": 63,
+        "course_code": "CSC14006",
+        "course_name": "Nhận dạng",
+        "course_major_code": "KHMT hướng TTNT",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 64,
+        "course_code": "CSC14118",
+        "course_name": "Nhập môn dữ liệu lớn",
+        "course_major_code": "KHMT hướng TTNT",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.5
+        ]
+    },
+    {
+        "course_id": 65,
+        "course_code": "CSC13001",
+        "course_name": "Lập trình Windows",
+        "course_major_code": "KTPM",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 66,
+        "course_code": "CSC13005",
+        "course_name": "Phân tích và quản lý yêu cầu phần mềm",
+        "course_major_code": "KTPM",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 67,
+        "course_code": "CSC13009",
+        "course_name": "Phát triển phần mềm cho thiết bị di động",
+        "course_major_code": "KTPM",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 68,
+        "course_code": "CSC13010",
+        "course_name": "Thiết kế phần mềm",
+        "course_major_code": "KTPM",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 69,
+        "course_code": "CSC11003",
+        "course_name": "Lập trình mạng",
+        "course_major_code": "MMT hướng ATTT",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 70,
+        "course_code": "CSC11006",
+        "course_name": "Nhập môn điện toán đám mây",
+        "course_major_code": "MMT hướng ATTT",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 71,
+        "course_code": "CSC11007",
+        "course_name": "Nhập môn DevOps",
+        "course_major_code": "MMT hướng ATTT",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            1.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 72,
+        "course_code": "CSC15012",
+        "course_name": "Ứng dụng xử lý ngôn ngữ tự nhiên trong doanh nghiệp (*)",
+        "course_major_code": "CNTThuc",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 73,
+        "course_code": "CSC15002",
+        "course_name": "Bảo mật cơ sở dữ liệu",
+        "course_major_code": "CNTThuc",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.5,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 74,
+        "course_code": "CSC15003",
+        "course_name": "Mã hóa ứng dụng",
+        "course_major_code": "CNTThuc",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.5,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            1.0
+        ]
+    },
+    {
+        "course_id": 75,
+        "course_code": "CSC15007",
+        "course_name": "Thống kê máy tính và ứng dụng",
+        "course_major_code": "CNTThuc",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.5,
+            1.0
+        ]
+    },
+    {
+        "course_id": 76,
+        "course_code": "CSC15105",
+        "course_name": "Khai thác dữ liệu văn bản và ứng dụng",
+        "course_major_code": "CNTThuc",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.0,
+            0.25
+        ]
+    },
+    {
+        "course_id": 77,
+        "course_code": "CSC16003",
+        "course_name": "Phân tích thống kê dữ liệu nhiều biến",
+        "course_major_code": "TGMT",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 78,
+        "course_code": "CSC16004",
+        "course_name": "Thị giác máy tính",
+        "course_major_code": "TGMT",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            1.0,
+            0.0,
+            1.0
+        ]
+    },
+    {
+        "course_id": 79,
+        "course_code": "CSC16101",
+        "course_name": "Đồ họa ứng dụng",
+        "course_major_code": "TGMT",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 80,
+        "course_code": "CSC16109",
+        "course_name": "Ứng dụng xử lý ảnh số và video số",
+        "course_major_code": "TGMT",
+        "semester": 8,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 81,
+        "course_code": "CSC15201",
+        "course_name": "Đồ án Mã hóa ứng dụng và an ninh thông tin",
+        "course_major_code": "CNTThuc",
+        "semester": 11,
+        "credit": 6,
+        "weight": [
+            0.0,
+            0.25,
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.0,
+            0.25
+        ]
+    },
+    {
+        "course_id": 82,
+        "course_code": "CSC15202",
+        "course_name": "Đồ án tốt nghiệp hướng ứng dụng xử lý ngôn ngữ tự nhiên",
+        "course_major_code": "CNTThuc",
+        "semester": 11,
+        "credit": 6,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.0,
+            0.25
+        ]
+    },
+    {
+        "course_id": 83,
+        "course_code": "CSC12102",
+        "course_name": "Chuyên đề chọn lọc trong Hệ thống thông tin",
+        "course_major_code": "HTTT",
+        "semester": 11,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 84,
+        "course_code": "CSC12111",
+        "course_name": "Quản trị cơ sở dữ liệu hiện đại",
+        "course_major_code": "HTTT",
+        "semester": 11,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25
+        ]
+    },
+    {
+        "course_id": 85,
+        "course_code": "CSC14115",
+        "course_name": "Khoa học dữ liệu ứng dụng",
+        "course_major_code": "KHDL",
+        "semester": 11,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.0,
+            0.25,
+            0.25
+        ]
+    },
+    {
+        "course_id": 86,
+        "course_code": "CSC17107",
+        "course_name": "Ứng dụng phân tích dữ liệu thông minh",
+        "course_major_code": "KHDL",
+        "semester": 11,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.25
+        ]
+    },
+    {
+        "course_id": 87,
+        "course_code": "CSC14101",
+        "course_name": "Ẩn dữ liệu và chia sẻ thông tin",
+        "course_major_code": "KHMT hướng TTNT",
+        "semester": 11,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 88,
+        "course_code": "CSC14114",
+        "course_name": "Ứng dụng dữ liệu lớn",
+        "course_major_code": "KHMT hướng TTNT",
+        "semester": 11,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.0,
+            0.0,
+            0.25
+        ]
+    },
+    {
+        "course_id": 89,
+        "course_code": "CSC17103",
+        "course_name": "Khai thác dữ liệu đồ thị",
+        "course_major_code": "KHMT hướng TTNT",
+        "semester": 11,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0
+        ]
+    },
+    {
+        "course_id": 90,
+        "course_code": "CSC13118",
+        "course_name": "Phát triển ứng dụng cho thiết bị di động nâng cao",
+        "course_major_code": "KTPM",
+        "semester": 11,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25
+        ]
+    },
+    {
+        "course_id": 91,
+        "course_code": "CSC13101",
+        "course_name": "Các chủ đề nâng cao trong Công nghệ phần mềm",
+        "course_major_code": "KTPM",
+        "semester": 11,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 92,
+        "course_code": "CSC13116",
+        "course_name": "Đồ án Công nghệ phần mềm",
+        "course_major_code": "KTPM",
+        "semester": 11,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25
+        ]
+    },
+    {
+        "course_id": 93,
+        "course_code": "CSC11106",
+        "course_name": "Truyền thông không dây",
+        "course_major_code": "MMT hướng ATTT",
+        "semester": 11,
+        "credit": 4,
+        "weight": [
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 94,
+        "course_code": "CSC11111",
+        "course_name": "Chuyên đề tốt nghiệp Mạng máy tính",
+        "course_major_code": "MMT hướng ATTT",
+        "semester": 11,
+        "credit": 4,
+        "weight": [
+            0.25,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25
+        ]
+    },
+    {
+        "course_id": 95,
+        "course_code": "CSC11119",
+        "course_name": "Chuyên đề phân tích mạng",
+        "course_major_code": "MMT hướng ATTT",
+        "semester": 11,
+        "credit": 4,
+        "weight": [
+            0.25,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25
+        ]
+    },
+    {
+        "course_id": 96,
+        "course_code": "CSC16111",
+        "course_name": "Chuyên đề Thị giác máy tính",
+        "course_major_code": "TGMT",
+        "semester": 11,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.25
+        ]
+    },
+    {
+        "course_id": 97,
+        "course_code": "CSC16113",
+        "course_name": "Thị giác máy tính ba chiều",
+        "course_major_code": "TGMT",
+        "semester": 11,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 98,
+        "course_code": "CSC10003",
+        "course_name": "Phương pháp lập trình hướng đối tượng",
+        "course_major_code": "Cơ sở ngành",
+        "semester": 3,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 99,
+        "course_code": "CSC10009",
+        "course_name": "Hệ thống máy tính",
+        "course_major_code": "Cơ sở ngành",
+        "semester": 3,
+        "credit": 2,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 100,
+        "course_code": "CSC10008",
+        "course_name": "Mạng máy tính",
+        "course_major_code": "Cơ sở ngành",
+        "semester": 3,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 101,
+        "course_code": "MTH00005",
+        "course_name": "Vi tích phân 1",
+        "course_major_code": "Đại cương",
+        "semester": 3,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 102,
+        "course_code": "MTH00008",
+        "course_name": "Đại số tuyến tính",
+        "course_major_code": "Đại cương",
+        "semester": 3,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 103,
+        "course_code": "CSC10004",
+        "course_name": "Cấu trúc dữ liệu và giải thuật (mở lại)",
+        "course_major_code": "Cơ sở ngành",
+        "semester": 3,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 104,
+        "course_code": "CSC14003",
+        "course_name": "Cơ sở trí tuệ nhân tạo",
+        "course_major_code": "Cơ sở ngành",
+        "semester": 6,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 105,
+        "course_code": "CSC10006",
+        "course_name": "Cơ sở dữ liệu",
+        "course_major_code": "Cơ sở ngành",
+        "semester": 6,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 106,
+        "course_code": "MTH00057",
+        "course_name": "Toán ứng dụng và thống kê cho Công nghệ thông tin",
+        "course_major_code": "Đại cương",
+        "semester": 6,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 107,
+        "course_code": "MTH00059",
+        "course_name": "Phương pháp tính",
+        "course_major_code": "Đại cương",
+        "semester": 6,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 108,
+        "course_code": "PHY00007",
+        "course_name": "Vật lý cho Công nghệ thông tin",
+        "course_major_code": "Đại cương",
+        "semester": 6,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 109,
+        "course_code": "CSC13002",
+        "course_name": "Nhập môn công nghệ phần mềm",
+        "course_major_code": "Cơ sở ngành",
+        "semester": 6,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 110,
+        "course_code": "CSC15004",
+        "course_name": "Học thống kê",
+        "course_major_code": "CNTThuc",
+        "semester": 9,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.5,
+            1.0
+        ]
+    },
+    {
+        "course_id": 111,
+        "course_code": "CSC12105",
+        "course_name": "Thương mại điện tử",
+        "course_major_code": "HTTT",
+        "semester": 9,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 112,
+        "course_code": "CSC12106",
+        "course_name": "Tương tác người – máy",
+        "course_major_code": "HTTT",
+        "semester": 9,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 113,
+        "course_code": "CSC14118",
+        "course_name": "Nhập môn dữ liệu lớn",
+        "course_major_code": "KHDL",
+        "semester": 9,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.5
+        ]
+    },
+    {
+        "course_id": 114,
+        "course_code": "CSC17103",
+        "course_name": "Khai thác dữ liệu đồ thị",
+        "course_major_code": "KHDL",
+        "semester": 9,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5,
+            0.0
+        ]
+    },
+    {
+        "course_id": 115,
+        "course_code": "CSC14001",
+        "course_name": "Automata và ngôn ngữ hình thức",
+        "course_major_code": "KHMT hướng TTNT",
+        "semester": 9,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 116,
+        "course_code": "CSC14111",
+        "course_name": "Nhập môn thiết kế và phân tích giải thuật",
+        "course_major_code": "KHMT hướng TTNT",
+        "semester": 9,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 117,
+        "course_code": "CSC13003",
+        "course_name": "Kiểm thử phần mềm",
+        "course_major_code": "KTPM",
+        "semester": 9,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+        ]
+    },
+    {
+        "course_id": 118,
+        "course_code": "CSC13006",
+        "course_name": "Quản lý dự án phần mềm",
+        "course_major_code": "KTPM",
+        "semester": 9,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 119,
+        "course_code": "CSC13106",
+        "course_name": "Kiến trúc phần mềm",
+        "course_major_code": "KTPM",
+        "semester": 9,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+        ]
+    },
+    {
+        "course_id": 120,
+        "course_code": "CSC13112",
+        "course_name": "Thiết kế giao diện",
+        "course_major_code": "KTPM",
+        "semester": 9,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 121,
+        "course_code": "CSC11002",
+        "course_name": "Hệ thống viễn thông",
+        "course_major_code": "MMT hướng ATTT",
+        "semester": 9,
+        "credit": 4,
+        "weight": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 122,
+        "course_code": "CSC11118",
+        "course_name": "Triển khai và vận hành điện toán đám mây",
+        "course_major_code": "MMT hướng ATTT",
+        "semester": 9,
+        "credit": 4,
+        "weight": [
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 123,
+        "course_code": "CSC15001",
+        "course_name": "An ninh máy tính",
+        "course_major_code": "MMT hướng ATTT",
+        "semester": 9,
+        "credit": 4,
+        "weight": [
+            1.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            1.0
+        ]
+    },
+    {
+        "course_id": 124,
+        "course_code": "CSC16105",
+        "course_name": "Truy vấn thông tin thị giác",
+        "course_major_code": "TGMT",
+        "semester": 9,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "course_id": 125,
+        "course_code": "CSC16106",
+        "course_name": "Nhập môn lập trình điều khiển thiết bị thông minh",
+        "course_major_code": "TGMT",
+        "semester": 9,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.5,
+            0.0,
+            0.5,
+            0.0,
+            0.5,
+            0.5,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 126,
+        "course_code": "CSC15010",
+        "course_name": "Blockchain và ứng dụng",
+        "course_major_code": "CNTThuc",
+        "semester": 12,
+        "credit": 4,
+        "weight": [
+            0.25,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 127,
+        "course_code": "CSC12108",
+        "course_name": "Ứng dụng phân tán",
+        "course_major_code": "HTTT",
+        "semester": 12,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25
+        ]
+    },
+    {
+        "course_id": 128,
+        "course_code": "CSC14116",
+        "course_name": "Lập trình song song ứng dụng",
+        "course_major_code": "KHDL",
+        "semester": 12,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.0,
+            0.25,
+            0.25
+        ]
+    },
+    {
+        "course_id": 129,
+        "course_code": "CSC13115",
+        "course_name": "Các công nghệ mới trong phát triển phần mềm",
+        "course_major_code": "KTPM",
+        "semester": 12,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25
+        ]
+    },
+    {
+        "course_id": 130,
+        "course_code": "CSC11117",
+        "course_name": "Hệ điều hành Linux và ứng dụng",
+        "course_major_code": "MMT hướng ATTT",
+        "semester": 12,
+        "credit": 4,
+        "weight": [
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5
+        ]
+    },
+    {
+        "course_id": 131,
+        "course_code": "CSC11111",
+        "course_name": "Chuyên đề tốt nghiệp Mạng máy tính",
+        "course_major_code": "MMT hướng ATTT",
+        "semester": 12,
+        "credit": 4,
+        "weight": [
+            0.25,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25
+        ]
+    },
+    {
+        "course_id": 132,
+        "course_code": "CSC16112",
+        "course_name": "Chuyên đề Xử lý ảnh số và video số",
+        "course_major_code": "TGMT",
+        "semester": 12,
+        "credit": 4,
+        "weight": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.25
+        ]
+    }
+]
