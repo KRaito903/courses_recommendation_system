@@ -1,0 +1,74 @@
+{
+    "NUM_STUDENT": 500,
+    "NUM_COURSE": 150,
+    "AVG_ENROLLED_COURSES_PER_STUDENT": 8,
+    "AVG_WILL_ENROLL_COURSES_PER_STUDENT": 2,
+
+    "STUDENT_CODE_LENGTH": 8,
+    "STUDENT_MAJOR_CODE_LIST": ["MMT hướng ATTT", "MMT", "HTTT", "KTPM", "KHMT hướng TTNT", "CNTThuc", "TGMT", "KHDL", "ATTT", "CNTTin"],
+    "SEMESTER_LIST": [1, 4, 7, 10],
+    "GPA_SCALE": 10.0,
+    "DEFAULT_IMAGE_URL": "https://scontent.fsgn2-9.fna.fbcdn.net/v/t39.30808-6/540980380_1301233021796524_5335302452002559776_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=qC5AoRw5sHsQ7kNvwGjC9fo&_nc_oc=AdlEeEwoPxMKCYWqRgynYKmm1MVk-gLwUz2NeqU4AKdbh51QQlfCod6kGneA1vSxWjA&_nc_zt=23&_nc_ht=scontent.fsgn2-9.fna&_nc_gid=lWjMtWSscEjE83e7I68NWQ&oh=00_AfhXO59tJvLjwDGlvCgg9gKsqe5XgvSmeQ2H29nEcoA1RQ&oe=69159460",
+    "INIT_SEMESTER_BY_STUDENT_CODE_PREFIX": {
+        "22": 10,
+        "23": 7,
+        "24": 4,
+        "25": 1
+    },
+    "COURSE_CODE_LENGTH": 8,
+    "COURSE_NAME_PREFIX_LIST": ["CSC", "MTH", "PHY"],
+    "COURSE_MAJOR_CODE_LIST": ["Cơ sở ngành", "Đại cương", "MMT hướng ATTT", "HTTT", "KTPM", "KHMT hướng TTNT", "CNTThuc", "TGMT", "KHDL", "HTTT/KHDL", "MMT hướng ATTT/CNTThuc"],
+    "SEMESTER_RANGE": [1, 12],
+    "CREDIT_LIST": [2, 4, 6],
+    "WEIGHT_VALUES": [0.0, 0.25, 0.5, 1.0],
+    "ENROLLMENT_LIST": ["liked", "disliked", "will_enroll"],
+    "GENERATED_FILEPATH_PREFIX": "./data/generated-dataset",
+    "PREPROCESSED_FILEPATH_PREFIX": "./data/preprocessed-dataset",
+    "TRAINED_MODEL_FILEPATH": "./models/final_model_state.pth",
+    "RECOMMENDATIONS_FILEPATH_PREFIX": "./responses/recommendations",
+
+    "ONEHOT_STUDENT_MAJOR" : {
+        "MMT hướng ATTT":   [1,0,0,0,0,0,0,0,0],
+        "MMT":              [1,0,0,0,0,0,0,0,0],
+        "HTTT":             [0,1,0,0,0,0,0,0,0],
+        "KTPM":             [0,0,1,0,0,0,0,0,0],
+        "KHMT hướng TTNT":  [0,0,0,1,0,0,0,0,0],
+        "CNTThuc":          [0,0,0,0,1,0,0,0,0],
+        "TGMT":             [0,0,0,0,0,1,0,0,0],
+        "KHDL":             [0,0,0,0,0,0,1,0,0],
+        "ATTT":             [0,0,0,0,0,0,0,1,0],
+        "CNTTin":           [0,0,0,0,0,0,0,0,1]
+    },
+    "MANYHOTS_COURSE_MAJOR" : {
+        "Cơ sở ngành":      [0,0,0,0,0,0,0,0,0],
+        "Đại cương":        [0,0,0,0,0,0,0,0,0],
+        "MMT hướng ATTT":   [1,1,0,0,0,0,0,0,0],
+        "HTTT":             [0,0,1,0,0,0,0,0,0],
+        "KTPM":             [0,0,0,1,0,0,0,0,0],
+        "KHMT hướng TTNT":  [0,0,0,0,1,0,0,0,0],
+        "CNTThuc":          [0,0,0,0,0,1,0,0,0],
+        "TGMT":             [0,0,0,0,0,0,1,0,0],
+        "KHDL":             [0,0,0,0,0,0,0,1,0],
+        "HTTT/KHDL":        [0,0,1,0,0,0,0,1,0],
+        "MMT hướng ATTT/CNTThuc": [1,1,0,0,0,1,0,0,0]
+    },
+    "ENROLLMENT_WEIGHT" : {
+        "liked": 1.0,
+        "disliked": -1.0,
+        "will_enroll": 0.5
+    },
+
+    "NUM_EPOCHS": 1000,
+    "BATCH_SIZE": 256,
+    "NUM_NEGATIVE": 5,
+    "EARLY_STOPPING_PATIENCE": 10,
+    "EARLY_STOPPING_MIN_DELTA": 0.0001,
+    "USE_EARLY_STOPPING": 1,
+    "TEST_SPLIT": 0.2,
+    "VALID_SPLIT": 0.1,
+    "K_LIST": [1, 3, 5],
+    "EMBEDDING_DIM": 128,
+    "NUM_LAYERS": 5,
+    "EVAL_INTERVAL": 10,
+    "TOP_K": 10
+}
