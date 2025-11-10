@@ -58,7 +58,7 @@ const createMultipleStudents = async (studentsData) => {
 // Get student by ID
 const getStudentById = async (student_id) => {
     try {
-        const studentRef = studentCollection.doc(student_id);
+        const studentRef = studentCollection.doc(student_id.toString());
         const doc = await studentRef.get();
         if (!doc.exists) {
             throw new Error(`Student with ID ${student_id} not found`);

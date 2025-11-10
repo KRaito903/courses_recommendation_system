@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+service TestService {
+    rpc Addfunction (TwoNumber) returns (Result);
+}
+
+message TwoNumber {
+    double a = 1;
+    double b = 2;
+}
+
+message Result {
+    string res = 1;
+}

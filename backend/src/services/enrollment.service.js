@@ -86,7 +86,7 @@ const getCoursesOfStudent = async (student_id) => {
         const course_ids = enrollments.docs.map(doc => doc.data().course_id);
         const coursePromises = course_ids.map(id => db.collection('courses').doc(String(id)).get());
         const courses = await Promise.all(coursePromises);
-        return courses.map(doc => ({...doc.data(), type: enrollmentMap[doc.id]?.type || 'unknown', rating: enrollmentMap[doc.id]?.rating || null }));
+        return courses.map(doc => ({...doc.data(), type: enrollmentMap[doc.id]?.type || 'unknown'}));
     } catch (error) {
         throw new Error('Error getting courses of student: ' + error.message);
     }

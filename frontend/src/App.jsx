@@ -10,40 +10,82 @@ import ProfilePage from './pages/ProfilePage.jsx';
 import CoursesPage from './pages/CoursesPage.jsx';
 import RecommendationsPage from './pages/RecommendationsPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
+import GraphFullScreen from './pages/GraphFullScreen.jsx';
+
+// Admin pages
+import AdminDashboard from './pages/admin/AdminDashboard.jsx';
+import AdminUsers from './pages/admin/AdminUsers.jsx';
+import AdminModel from './pages/admin/AdminModel.jsx';
 
 // (Tùy chọn) Component bảo vệ route
 import AuthGuard from './components/Common/AuthGuard.jsx';
+import AdminGuard from './components/common/AdminGuard.jsx';
+import AdminDebug from './components/common/AdminDebug.jsx';
 
 function App() {
     return (
-        <Layout> {/* Layout bọc tất cả các Routes */}
+        <>
+            {/* Debug component - chỉ hiện trong development */}
+            <AdminDebug />
+            
             <Routes>
-                {/* Routes công khai */}
-                <Route path="/" element={<HomePage />} />
-                <Route path="/auth" element={<AuthPage />} />
-                <Route path="/contact" element={<ContactPage />} />
+            {/* Graph fullscreen route - WITHOUT Layout */}
+            <Route path="/graph-fullscreen" element={
+                <AuthGuard>
+                    <GraphFullScreen />
+                </AuthGuard>
+            } />
+            
+            {/* All other routes - WITH Layout */}
+            <Route path="/*" element={
+                <Layout>
+                    <Routes>
+                        {/* Routes công khai */}
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/auth" element={<AuthPage />} />
+                        <Route path="/contact" element={<ContactPage />} />
 
-                {/* Routes cần đăng nhập (Dùng AuthGuard) */}
-                <Route path="/profile" element={
-                    <AuthGuard>
-                        <ProfilePage />
-                    </AuthGuard>
-                } />
-                <Route path="/courses" element={
-                    <AuthGuard>
-                        <CoursesPage />
-                    </AuthGuard>
-                } />
-                <Route path="/recommendations" element={
-                    <AuthGuard>
-                        <RecommendationsPage />
-                    </AuthGuard>
-                } />
-                
-                {/* (Tùy chọn: Trang 404) */}
-                {/* <Route path="*" element={<NotFoundPage />} /> */}
+                        {/* Routes cần đăng nhập (Dùng AuthGuard) */}
+                        <Route path="/profile" element={
+                            <AuthGuard>
+                                <ProfilePage />
+                            </AuthGuard>
+                        } />
+                        <Route path="/courses" element={
+                            <AuthGuard>
+                                <CoursesPage />
+                            </AuthGuard>
+                        } />
+                        <Route path="/recommendations" element={
+                            <AuthGuard>
+                                <RecommendationsPage />
+                            </AuthGuard>
+                        } />
+
+                        {/* Admin Routes - Protected by AdminGuard */}
+                        <Route path="/admin" element={
+                            <AdminGuard>
+                                <AdminDashboard />
+                            </AdminGuard>
+                        } />
+                        <Route path="/admin/users" element={
+                            <AdminGuard>
+                                <AdminUsers />
+                            </AdminGuard>
+                        } />
+                        <Route path="/admin/model" element={
+                            <AdminGuard>
+                                <AdminModel />
+                            </AdminGuard>
+                        } />
+                        
+                        {/* (Tùy chọn: Trang 404) */}
+                        {/* <Route path="*" element={<NotFoundPage />} /> */}
+                    </Routes>
+                </Layout>
+            } />
             </Routes>
-        </Layout>
+        </>
     );
 }
 

@@ -22,8 +22,8 @@ const ContactPage = () => {
                         <span style={{ fontSize: '2rem' }}>📧</span>
                         <div>
                             <strong style={{ display: 'block', marginBottom: '0.25rem' }}>Email</strong>
-                            <a href="mailto:support@example.com" style={{ color: 'var(--primary-color)' }}>
-                                support@example.com
+                            <a href="mailto:khoile903@gmail.com" style={{ color: 'var(--primary-color)' }}>
+                                khoile903@gmail.com
                             </a>
                         </div>
                     </div>
@@ -39,7 +39,7 @@ const ContactPage = () => {
                         <span style={{ fontSize: '2rem' }}>�</span>
                         <div>
                             <strong style={{ display: 'block', marginBottom: '0.25rem' }}>Điện thoại</strong>
-                            <a href="tel:+84123456789" style={{ color: 'var(--primary-color)' }}>
+                            <a href="tel:+840123456789" style={{ color: 'var(--primary-color)' }}>
                                 +84 123 456 789
                             </a>
                         </div>

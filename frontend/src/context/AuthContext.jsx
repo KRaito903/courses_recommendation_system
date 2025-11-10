@@ -23,12 +23,14 @@ export const useAuth = () => {
 // 3. Tạo Provider (Component bọc toàn bộ app)
 export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
+    const [student, setStudent] = useState(null);  // ← New: Store student
+    const [userRole, setUserRole] = useState(null);  // ← New: Store user role (admin, user, etc.)
     const [loading, setLoading] = useState(true);
 
     // Hàm đăng ký - CHỈ tạo Firebase Auth user, KHÔNG tạo profile ngay
     const register = async (email, password, student_code, displayName) => {
         try {
-            console.log("dang ky")
+            console.log("Đăng ký user với email:", email);
             // Bước 1: Tạo user ở Firebase Auth (Client)
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             
@@ -97,12 +99,18 @@ export const AuthProvider = ({ children }) => {
 
             // Gọi API tạo profile
             console.log('📝 Đang tạo profile trong Firestore...');
-            await profileService.createProfile(token, profileData);
+            const response = await profileService.createProfile(token, profileData);
             
+            // ✅ Extract student_id từ response và lưu vào state
+            if (response && response.student) {
+                setStudent(response.student);
+                console.log('✅ Student ID saved:', response.student);
+            }
             
             console.log('✅ Profile đã được tạo thành công!');
             alert('🎉 Chào mừng! Tài khoản của bạn đã được kích hoạt.');
-            
+            // Reload page to reflect changes
+            window.location.reload();
             return true;
         } catch (error) {
             // Nếu lỗi là profile đã tồn tại → cũng OK, xóa pending data
@@ -149,6 +157,9 @@ export const AuthProvider = ({ children }) => {
                 if (freshUser) {
                     await freshUser.reload();
                     await createUserProfile(freshUser);
+                    const token = await userCredential.user.getIdToken();
+                    const data = await profileService.getProfile(token);
+                    setStudent(data);  // ← Set student from fetched profile
                 }
             } catch (err) {
                 console.error('Error creating profile after login:', err);
@@ -170,9 +181,22 @@ export const AuthProvider = ({ children }) => {
             console.log('🔔 onAuthStateChanged triggered. User:', user);
             if (user) {
                 try {
-                    // Reload to get latest emailVerified
+                    // Reload to get latest emailVerified and custom claims
                     await user.reload();
                     const freshUser = auth.currentUser;
+                    
+                    // Get ID token with custom claims
+                    const tokenResult = await freshUser.getIdTokenResult();
+                    console.log('🔑 Custom claims:', tokenResult.claims);
+                    
+                    // Extract role from custom claims
+                    const role = tokenResult.claims.role || 'user';
+                    setUserRole(role);
+                    console.log('👤 User role:', role);
+                    
+                    const token = await freshUser.getIdToken();
+                    const data = await profileService.getProfile(token);
+                    setStudent(data);  // ← Set student from fetched profile
                     // Nếu chưa verify -> sign out và redirect về /auth
                     if (!freshUser?.emailVerified) {
                         console.log('⚠️ User tồn tại nhưng chưa verify. Sign out và redirect.');
@@ -192,11 +216,23 @@ export const AuthProvider = ({ children }) => {
                             console.log('🔄 Phát hiện pending profile, đang tạo...');
                             setTimeout(async () => {
                                 try {
-                                    await createUserProfile(freshUser);
+                                    const result = await createUserProfile(freshUser);
+                                    // After profile created, fetch full profile to get student_id
+                                    if (result) {
+                                        const pendingProfile = JSON.parse(pendingDataStr);
+                                        if (pendingProfile.student_id) {
+                                            setStudentId(pendingProfile.student_id);
+                                            console.log('✅ Student ID loaded from pending:', pendingProfile.student_id);
+                                        }
+                                    }
                                 } catch (error) {
                                     console.error('Error auto-creating profile:', error);
                                 }
                             }, 500);
+                        } else {
+                            // Profile already created, need to fetch student_id from Firestore
+                            // You can implement getProfile call here if needed
+                            console.log('📚 Profile already exists, fetching student_id...');
                         }
                     }
                 } catch (error) {
@@ -215,11 +251,14 @@ export const AuthProvider = ({ children }) => {
 
     const value = {
         currentUser,
+        student,
+        userRole,
         loading,
         register,
         login,
         logout,
-        createUserProfile
+        createUserProfile,
+        isAdmin: userRole === 'admin'
     };
 
     return (

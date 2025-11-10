@@ -24,11 +24,11 @@ export const createProfile = async (token, profileData) => {
  * Lấy thông tin profile của user hiện tại
  * Gọi API: GET /api/students/:id
  * @param {string} token - Firebase ID Token
- * @param {string} studentId - MSSV của sinh viên
  */
-export const getProfile = async (token, studentId) => {
+export const getProfile = async (token) => {
     try {
-        const response = await get(`/students/${studentId}`, token);
+        const response = await get(`/auth/user`, token);
+        console.log('✅ Profile fetched successfully:', response);
         return response;
     } catch (error) {
         console.error('❌ Error fetching profile:', error.message);
@@ -43,7 +43,21 @@ export const getProfile = async (token, studentId) => {
  * @param {string} studentId - MSSV của sinh viên
  * @param {object} updateData - Dữ liệu cần cập nhật
  */
-export const updateProfile = async (token, studentId, updateData) => {
+export const updateProfile = async (token, updateData) => {
+    try {
+        const response = await put(`/auth/user`, updateData, token);
+        console.log('✅ Profile updated successfully:', response);
+        return response;
+    } catch (error) {
+        console.error('❌ Error updating profile:', error.message);
+        throw error;
+    }
+};
+
+
+
+
+export const updateStudent = async (token, studentId, updateData) => {
     try {
         const response = await put(`/students/${studentId}`, updateData, token);
         console.log('✅ Profile updated successfully:', response);
@@ -53,3 +67,4 @@ export const updateProfile = async (token, studentId, updateData) => {
         throw error;
     }
 };
+

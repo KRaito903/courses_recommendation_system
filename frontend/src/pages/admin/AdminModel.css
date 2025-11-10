@@ -1,0 +1,217 @@
+/* src/pages/admin/AdminModel.css */
+
+.model-info-section,
+.training-config-section,
+.training-progress-section,
+.training-history-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.model-info-section h2,
+.training-config-section h2,
+.training-progress-section h2,
+.training-history-section h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 10px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.info-label {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.info-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.config-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.config-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.config-item label {
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.config-item select,
+.config-item input {
+    padding: 0.75rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+    background: white;
+}
+
+.config-item select:focus,
+.config-item input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.config-item select:disabled,
+.config-item input:disabled {
+    background: #f3f4f6;
+    cursor: not-allowed;
+}
+
+.training-progress-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.training-progress-section h2 {
+    color: white;
+}
+
+.progress-info {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.progress-status,
+.progress-epoch,
+.progress-loss {
+    font-size: 1rem;
+}
+
+.progress-status strong,
+.progress-epoch strong,
+.progress-loss strong {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    border-radius: 15px;
+}
+
+.action-section {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.btn-train {
+    padding: 1rem 3rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-train:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-train:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.training-note {
+    margin-top: 1rem;
+    color: #dc2626;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.history-table {
+    overflow-x: auto;
+}
+
+.error-message {
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.success-message {
+    background: #dcfce7;
+    border: 1px solid #86efac;
+    color: #166534;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .info-grid,
+    .config-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .progress-info {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .btn-train {
+        width: 100%;
+        padding: 1rem;
+    }
+}

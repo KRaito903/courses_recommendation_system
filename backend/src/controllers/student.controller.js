@@ -1,4 +1,4 @@
-import e from 'express';
+
 import { createStudent, getStudentById, updateStudentById, deleteStudentById , getAllStudents, createMultipleStudents } from '../services/student.service.js';
 
 

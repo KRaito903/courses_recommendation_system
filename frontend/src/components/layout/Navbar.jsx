@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext.jsx';
 import './Navbar.css';
 
 const Navbar = () => {
-    const { currentUser, logout } = useAuth();
+    const { currentUser, logout, isAdmin } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -42,6 +42,11 @@ const Navbar = () => {
                         <>
                             <Link to="/recommendations" className={isActive('/recommendations')}>Gợi ý</Link>
                             <Link to="/profile" className={isActive('/profile')}>Hồ sơ</Link>
+                            {isAdmin && (
+                                <Link to="/admin" className={isActive('/admin')} style={{ color: '#f59e0b', fontWeight: 'bold' }}>
+                                    🎛️ Admin
+                                </Link>
+                            )}
                         </>
                     )}
                     
