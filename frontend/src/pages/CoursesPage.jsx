@@ -2,13 +2,18 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext.jsx';
 import * as courseService from '../services/courseService.js';
+import { useCourses } from '../context/CoursesContext.jsx';
 import './CoursesPage.css';
 
+
+
 const CoursesPage = () => {
+
+    //
     const { currentUser, student } = useAuth();
-    const [courses, setCourses] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
+    // const [courses, setCourses] = useState([]);
+
+    const { courses, loading, error, setCourses } = useCourses();
     const [selectedCourse, setSelectedCourse] = useState(null);
     const [showAddForm, setShowAddForm] = useState(false);
     const [availableCourses, setAvailableCourses] = useState([]);
@@ -30,14 +35,10 @@ const CoursesPage = () => {
         if (!currentUser || !student) {
             return;
         }
-
-
         console.log('📥 Fetching enrolled courses for student:', student);
 
         const fetchCourses = async () => {
             try {
-                setLoading(true);
-                setError('');
                 const token = await currentUser.getIdToken();
                 const studentCourses = await courseService.getStudentCourses(token, student.student.id);
 
@@ -48,10 +49,7 @@ const CoursesPage = () => {
                 console.log('✅ Courses loaded:', validCourses.length);
             } catch (err) {
                 console.error('❌ Error fetching courses:', err);
-                setError(err.message || 'Failed to fetch courses');
-            } finally {
-                setLoading(false);
-            }
+            } 
         };
 
         fetchCourses();
@@ -87,13 +85,11 @@ const CoursesPage = () => {
         e.preventDefault();
 
         if (!formData.course_id) {
-            setError('Please select a course');
             return;
         }
 
         try {
             setSubmitting(true);
-            setError('');
 
             const token = await currentUser.getIdToken();
             const newEnrollment = await courseService.createEnrollment(
@@ -117,7 +113,6 @@ const CoursesPage = () => {
             alert('✅ Course added successfully!');
         } catch (err) {
             console.error('❌ Error adding course:', err);
-            setError(err.message || 'Failed to add course');
         } finally {
             setSubmitting(false);
         }
@@ -131,7 +126,6 @@ const CoursesPage = () => {
 
         try {
             setSubmitting(true);
-            setError('');
 
             const token = await currentUser.getIdToken();
             const updatedEnrollment = await courseService.updateEnrollment(
@@ -155,7 +149,6 @@ const CoursesPage = () => {
             alert('✅ Course rating updated successfully!');
         } catch (err) {
             console.error('❌ Error updating course:', err);
-            setError(err.message || 'Failed to update course');
         } finally {
             setSubmitting(false);
         }
@@ -169,7 +162,6 @@ const CoursesPage = () => {
 
         try {
             setSubmitting(true);
-            setError('');
 
             const token = await currentUser.getIdToken();
             await courseService.deleteEnrollment(
@@ -191,7 +183,6 @@ const CoursesPage = () => {
             alert('✅ Course deleted successfully!');
         } catch (err) {
             console.error('❌ Error deleting course:', err);
-            setError(err.message || 'Failed to delete course');
         } finally {
             setSubmitting(false);
         }
