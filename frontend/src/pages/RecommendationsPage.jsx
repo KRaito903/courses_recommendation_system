@@ -3,6 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import './RecommendationsPage.css';
+import {getRecommendations } from '../services/recommendationService.js';
+
+const SEMESTER = 0;
+const TOTAL_RECOMMENDATIONS = 12;
 
 const RecommendationsPage = () => {
     const { currentUser, student } = useAuth();
@@ -14,7 +18,7 @@ const RecommendationsPage = () => {
     const [showDetailsModal, setShowDetailsModal] = useState(false);
     const [showGraphView, setShowGraphView] = useState(false);
     const [activeGraphType, setActiveGraphType] = useState(null); // 'profile-based' or 'collaborative'
-    const [selectedSemester, setSelectedSemester] = useState('all'); // Filter by semester
+    const [selectedSemester, setSelectedSemester] = useState(0); // Filter by semester
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -30,10 +34,7 @@ const RecommendationsPage = () => {
 
                 // TODO: Replace with actual API calls
                 // Profile-based recommendations
-                // const profileData = await fetch(
-                //     `/api/recommendations/profile-based/${student.student.id}`,
-                //     { headers: { Authorization: `Bearer ${token}` } }
-                // );
+                const profileData = await getRecommendations(token, student.student.id, SEMESTER, TOTAL_RECOMMENDATIONS);
                 
                 // Collaborative recommendations
                 // const collabData = await fetch(
@@ -177,8 +178,8 @@ const RecommendationsPage = () => {
 
     // Filter courses by semester
     const filterCoursesBySemester = (courses) => {
-        if (selectedSemester === 'all') return courses;
-        return courses.filter(course => course.semester.toString() === selectedSemester);
+        if (selectedSemester === 0) return courses;
+        return courses.filter(course => course.semester === selectedSemester);
     };
 
     const filteredProfileRecommendations = filterCoursesBySemester(profileRecommendations);

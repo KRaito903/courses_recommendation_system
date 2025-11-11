@@ -1,5 +1,5 @@
 // src/services/recommendationService.js
-import { apiClient } from '../utils/apiClient.js';
+import { get, put, post, del } from '../utils/apiClient.js';
 
 /**
  * Get all recommendations from GNN model
@@ -9,14 +9,11 @@ import { apiClient } from '../utils/apiClient.js';
  * @param {string} student_id - Student ID
  * @returns {Promise<Array>} List of recommended courses with rank
  */
-export async function getRecommendations(token, student_id) {
+export async function getRecommendations(token, student_id, semesterFilter = 0, k = 10) {
     try {
         console.log('📥 Fetching recommendations for student:', student_id);
-        
-        const response = await apiClient.get(
-            `/api/recommendations/get-all/${student_id}`,
-            { headers: { Authorization: `Bearer ${token}` } }
-        );
+        console.log('📥 Semester filter:', semesterFilter, 'Top K:', k);
+        const response = await get(`/auth/recommendations?student_id=${student_id}&semester_filter=${semesterFilter}&k=${k}`,token);
 
         // Model returns sorted list, we add rank based on position
         const recommendationsWithRank = response.data.map((course, index) => ({
@@ -42,7 +39,7 @@ export async function getEnrolledCourses(token, student_id) {
     try {
         console.log('📥 Fetching enrolled courses for student:', student_id);
         
-        const response = await apiClient.get(
+        const response = await apiRequest.get(
             `/api/student/courses/${student_id}`,
             { headers: { Authorization: `Bearer ${token}` } }
         );

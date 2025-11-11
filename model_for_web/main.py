@@ -1,17 +1,23 @@
+import os
+import sys
 from data_generator import DataGenerator, save_generated_dataset_json
 from graph_builder import GraphBuilder
 from data_preprocessor import DataPreprocessor
 from data_loader import DataLoader
+import json
 from model import CourseRecommendationModel
+
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 IS_USE_EXTERNAL_COURSES = False
 IS_GENERATE_DATA = False
 IS_PREPROCESS_DATA = False
-IS_VISUALIZE_GRAPH = True
+IS_VISUALIZE_GRAPH = False
 IS_TRAIN_MODEL = False
 IS_EVAL_MODEL = False
-IS_RECOMMEND_COURSES = False
-IS_SAVE_RECOMMENDATIONS = False
+IS_RECOMMEND_COURSES = True
+IS_SAVE_RECOMMENDATIONS = True
 IS_COMPARE_MODELS = False
 
 COURSE_JSON_FILEPATH = './real_data_132_courses.json'
@@ -75,7 +81,7 @@ NUM_LAYERS = config.get('NUM_LAYERS', 5)
 EVAL_INTERVAL = config.get('EVAL_INTERVAL', 10)
 TOP_K = config.get('TOP_K', 10)
 
-def main():  
+def call_model_recommendation_system(student_id=1, semester_filter=0, k=10):  
     # Step 1: Generate dataset if needed
     if IS_GENERATE_DATA:
         print(f"\n[1] Generating synthetic dataset...")
@@ -236,86 +242,85 @@ def main():
     # Step 6: Show sample recommendations
     if IS_RECOMMEND_COURSES:
         # Load recommendation requests from file
-        recommendation_requests = DataLoader.load_recommendation_requests(filepath=RECOMMENDATION_REQUESTED_FILEPATH)
-        print(f"\n[6] Generating recommendations for {len(recommendation_requests)} request(s)...")
+        # recommendation_requests = DataLoader.load_recommendation_requests(filepath=RECOMMENDATION_REQUESTED_FILEPATH)
+        # print(f"\n[6] Generating recommendations for {len(recommendation_requests)} request(s)...")
         
-        for idx, request in enumerate(recommendation_requests, start=1):
-            student_id = request.get('student_id')
-            semester_filter = request.get('semester_filter')
+        # for idx, request in enumerate(recommendation_requests, start=1):
+            # student_id = request.get('student_id')
+            # semester_filter = request.get('semester_filter')
             
-            if student_id is None or semester_filter is None:
-                print(f"  Request {idx}: Skipping - missing student_id or semester_filter")
-                continue
-            
-            recommendations = model.recommend_courses(student_id, semester_filter, k=TOP_K,
-                                                    is_save_recommendations=IS_SAVE_RECOMMENDATIONS, 
-                                                    filepath_prefix=RECOMMENDATIONS_FILEPATH_PREFIX)
-            print(f"\n  Request {idx}: Student ID {student_id}, Semester Filter {semester_filter}")
-            print(f"  Top {TOP_K} recommended courses:")
-            # recommendations is a list of dicts: {'rank': int, 'course_id': int, 'score': float}
-            for rec in recommendations:
-                try:
-                    rank = int(rec.get('rank', 0))
-                    course_id = int(rec.get('course_id'))
-                    score = float(rec.get('score'))
-                    print(f"    Rank {rank}: Course ID {course_id} with score {score:.4f}")
-                except Exception:
-                    # Fallback in case structure changes
-                    print(f"    {rec}")
-
-        if IS_SAVE_RECOMMENDATIONS:
-            print(f"\n  Recommendations saved to files with prefix '{RECOMMENDATIONS_FILEPATH_PREFIX}'")
-    
-    # Step 7: Compare with other models
-    if IS_COMPARE_MODELS:
-        print(f"\n[7] Comparing different models...")
-        compare_results = []
-        for model_name in MODEL_LIST:
-            print(f"\n--> Running model: {model_name}")
-            # Build a fresh model instance for each model type
-            cmp_model = CourseRecommendationModel(data=preprocessed_data, embedding_dim=EMBEDDING_DIM, num_layers=NUM_LAYERS,
-                                                  using_unenrolled_for_test=USING_UNENROLLED_FOR_TEST, unenrolled_rate_in_graph=UNENROLLED_RATE_IN_GRAPH,
-                                                  test_split=TEST_SPLIT, valid_split=VALID_SPLIT,
-                                                  model_type=model_name)
-
-            # Train (with early stopping). Do not overwrite saved model files during comparison runs.
-            summary = cmp_model.train(num_epochs=NUM_EPOCHS, batch_size=BATCH_SIZE,
-                                     num_negative=NUM_NEGATIVE,
-                                     is_eval_during_training=False, ks=K_LIST,
-                                     is_save_model=False, filepath=TRAINED_MODEL_FILEPATH,
-                                     early_stopping_patience=EARLY_STOPPING_PATIENCE,
-                                     early_stopping_min_delta=EARLY_STOPPING_MIN_DELTA)
-
-            # Evaluate on test set
-            metrics = cmp_model.evaluate(ks=K_LIST)
-
-            # Collect results
-            row = {
-                'model': model_name,
-                'stop_epoch': int(summary.get('stop_epoch', NUM_EPOCHS)),
-                'time_s': float(summary.get('elapsed_time', 0.0)),
-                'mrr': float(metrics.get('mrr', 0.0))
-            }
-            for k in K_LIST:
-                row[f'hit@{k}'] = float(metrics.get(f'hit@{k}', 0.0))
-                row[f'ndcg@{k}'] = float(metrics.get(f'ndcg@{k}', 0.0))
-            compare_results.append(row)
-
-        # Pretty print comparison table
-        # Header
-        header_cols = ['Model', 'Stop Epoch', 'Time(s)', 'MRR'] + [f'Hit@{k}' for k in K_LIST] + [f'NDCG@{k}' for k in K_LIST]
-        col_widths = [max(len(str(r.get('model', ''))), 10) for r in compare_results]
-        # Print header
-        print('\nComparison Results:')
-        print(' | '.join(h.center(12) for h in header_cols))
-        print('-' * (14 * len(header_cols)))
-        for r in compare_results:
-            row_items = [str(r['model']).ljust(12), str(r['stop_epoch']).rjust(10), f"{r['time_s']:.2f}".rjust(10), f"{r['mrr']:.4f}".rjust(8)]
-            for k in K_LIST:
-                row_items.append(f"{r.get(f'hit@{k}', 0.0):.4f}".rjust(8))
-            for k in K_LIST:
-                row_items.append(f"{r.get(f'ndcg@{k}', 0.0):.4f}".rjust(8))
-            print(' | '.join(row_items))
+        if student_id is None or semester_filter is None:
+            print(f"  Request {idx}: Skipping - missing student_id or semester_filter")
+            return
         
-if __name__ == "__main__":
-    main()
+        recommendations = model.recommend_courses(student_id, semester_filter, k=TOP_K,
+                                                is_save_recommendations=IS_SAVE_RECOMMENDATIONS, 
+                                                filepath_prefix=RECOMMENDATIONS_FILEPATH_PREFIX)
+        # print(f"\n  Request {idx}: Student ID {student_id}, Semester Filter {semester_filter}")
+        # print(f"  Top {TOP_K} recommended courses:")
+        # recommendations is a list of dicts: {'rank': int, 'course_id': int, 'score': float}
+        for rec in recommendations:
+            try:
+                rank = int(rec.get('rank', 0))
+                course_id = int(rec.get('course_id'))
+                score = float(rec.get('score'))
+                print(f"    Rank {rank}: Course ID {course_id} with score {score:.4f}")
+            except Exception:
+                # Fallback in case structure changes
+                print(f"    {rec}")
+
+    return recommendations
+    # if IS_SAVE_RECOMMENDATIONS:
+    #     print(f"\n  Recommendations saved to files with prefix '{RECOMMENDATIONS_FILEPATH_PREFIX}'")
+
+    # # Step 7: Compare with other models
+    # if IS_COMPARE_MODELS:
+    #     print(f"\n[7] Comparing different models...")
+    #     compare_results = []
+    #     for model_name in MODEL_LIST:
+    #         print(f"\n--> Running model: {model_name}")
+    #         # Build a fresh model instance for each model type
+    #         cmp_model = CourseRecommendationModel(data=preprocessed_data, embedding_dim=EMBEDDING_DIM, num_layers=NUM_LAYERS,
+    #                                               using_unenrolled_for_test=USING_UNENROLLED_FOR_TEST, unenrolled_rate_in_graph=UNENROLLED_RATE_IN_GRAPH,
+    #                                               test_split=TEST_SPLIT, valid_split=VALID_SPLIT,
+    #                                               model_type=model_name)
+
+    #         # Train (with early stopping). Do not overwrite saved model files during comparison runs.
+    #         summary = cmp_model.train(num_epochs=NUM_EPOCHS, batch_size=BATCH_SIZE,
+    #                                  num_negative=NUM_NEGATIVE,
+    #                                  is_eval_during_training=False, ks=K_LIST,
+    #                                  is_save_model=False, filepath=TRAINED_MODEL_FILEPATH,
+    #                                  early_stopping_patience=EARLY_STOPPING_PATIENCE,
+    #                                  early_stopping_min_delta=EARLY_STOPPING_MIN_DELTA)
+
+    #         # Evaluate on test set
+    #         metrics = cmp_model.evaluate(ks=K_LIST)
+
+    #         # Collect results
+    #         row = {
+    #             'model': model_name,
+    #             'stop_epoch': int(summary.get('stop_epoch', NUM_EPOCHS)),
+    #             'time_s': float(summary.get('elapsed_time', 0.0)),
+    #             'mrr': float(metrics.get('mrr', 0.0))
+    #         }
+    #         for k in K_LIST:
+    #             row[f'hit@{k}'] = float(metrics.get(f'hit@{k}', 0.0))
+    #             row[f'ndcg@{k}'] = float(metrics.get(f'ndcg@{k}', 0.0))
+    #         compare_results.append(row)
+
+    #     # Pretty print comparison table
+    #     # Header
+    #     header_cols = ['Model', 'Stop Epoch', 'Time(s)', 'MRR'] + [f'Hit@{k}' for k in K_LIST] + [f'NDCG@{k}' for k in K_LIST]
+    #     col_widths = [max(len(str(r.get('model', ''))), 10) for r in compare_results]
+    #     # Print header
+    #     print('\nComparison Results:')
+    #     print(' | '.join(h.center(12) for h in header_cols))
+    #     print('-' * (14 * len(header_cols)))
+    #     for r in compare_results:
+    #         row_items = [str(r['model']).ljust(12), str(r['stop_epoch']).rjust(10), f"{r['time_s']:.2f}".rjust(10), f"{r['mrr']:.4f}".rjust(8)]
+    #         for k in K_LIST:
+    #             row_items.append(f"{r.get(f'hit@{k}', 0.0):.4f}".rjust(8))
+    #         for k in K_LIST:
+    #             row_items.append(f"{r.get(f'ndcg@{k}', 0.0):.4f}".rjust(8))
+    #         print(' | '.join(row_items))
+        
