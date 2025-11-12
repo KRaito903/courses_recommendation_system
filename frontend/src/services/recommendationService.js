@@ -14,15 +14,7 @@ export async function getRecommendations(token, student_id, semesterFilter = 0, 
         console.log('📥 Fetching recommendations for student:', student_id);
         console.log('📥 Semester filter:', semesterFilter, 'Top K:', k);
         const response = await get(`/auth/recommendations?student_id=${student_id}&semester_filter=${semesterFilter}&k=${k}`,token);
-
-        // Model returns sorted list, we add rank based on position
-        const recommendationsWithRank = response.data.map((course, index) => ({
-            ...course,
-            rank: index + 1
-        }));
-
-        console.log('✅ Recommendations loaded:', recommendationsWithRank.length);
-        return recommendationsWithRank;
+        return response.data;
     } catch (error) {
         console.error('❌ Error fetching recommendations:', error);
         throw new Error(error.response?.data?.message || 'Failed to fetch recommendations');

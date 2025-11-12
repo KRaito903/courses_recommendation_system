@@ -11,6 +11,7 @@ import CoursesPage from './pages/CoursesPage.jsx';
 import RecommendationsPage from './pages/RecommendationsPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
 import GraphFullScreen from './pages/GraphFullScreen.jsx';
+import GraphEditorPage from './pages/GraphEditorPage.jsx';
 
 // Admin pages
 import AdminDashboard from './pages/admin/AdminDashboard.jsx';
@@ -26,13 +27,20 @@ function App() {
     return (
         <>
             {/* Debug component - chỉ hiện trong development */}
-            <AdminDebug />
+            {/* <AdminDebug /> */}
             
             <Routes>
             {/* Graph fullscreen route - WITHOUT Layout */}
             <Route path="/graph-fullscreen" element={
                 <AuthGuard>
                     <GraphFullScreen />
+                </AuthGuard>
+            } />
+            
+            {/* Graph editor route - WITHOUT Layout */}
+            <Route path="/graph-editor" element={
+                <AuthGuard>
+                    <GraphEditorPage />
                 </AuthGuard>
             } />
             

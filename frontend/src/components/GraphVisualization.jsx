@@ -52,9 +52,8 @@ const GraphVisualization = ({ courses = [], enrolledCourses = [], graphType = 'p
             }
         });
 
-        // Recommended courses
-        const recommendedCount = Math.min(courses.length, 5);
-        courses.slice(0, recommendedCount).forEach((course, i) => {
+        // Recommended courses - Show all courses, not limited to 5
+        courses.forEach((course, i) => {
             const nodeId = `rec_${course.course_id || i}`;
             nodes.push({
                 id: nodeId,
@@ -134,9 +133,8 @@ const GraphVisualization = ({ courses = [], enrolledCourses = [], graphType = 'p
             });
         });
 
-        // Enrolled courses
-        const enrolledCount = Math.min(enrolledCourses.length, 3);
-        enrolledCourses.slice(0, enrolledCount).forEach((course, i) => {
+        // Enrolled courses - Show all enrolled courses, not limited to 3
+        enrolledCourses.forEach((course, i) => {
             const nodeId = `enr_${course.course_id || i}`;
             nodes.push({
                 id: nodeId,
@@ -270,8 +268,7 @@ const GraphVisualization = ({ courses = [], enrolledCourses = [], graphType = 'p
                 navigationButtons: true,
                 keyboard: {
                     enabled: true
-                },
-                tooltipStyle: 'div'
+                }
             },
             configure: {
                 enabled: false

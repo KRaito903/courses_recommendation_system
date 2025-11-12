@@ -5,14 +5,25 @@ import { useAuth } from '../context/AuthContext.jsx';
 import './RecommendationsPage.css';
 import {getRecommendations } from '../services/recommendationService.js';
 
+import { useCourses } from '../context/CoursesContext.jsx';
+
+
+//   const mockEnrolled = [
+//                     { course_id: 100, course_code: 'CSC00001', course_name: 'Introduction to Programming' },
+//                     { course_id: 101, course_code: 'MAT00001', course_name: 'Calculus I' }
+//                 ];
+
 const SEMESTER = 0;
 const TOTAL_RECOMMENDATIONS = 12;
 
 const RecommendationsPage = () => {
     const { currentUser, student } = useAuth();
+    const { courses } = useCourses();
+
     const navigate = useNavigate();
     const [profileRecommendations, setProfileRecommendations] = useState([]);
     const [collaborativeRecommendations, setCollaborativeRecommendations] = useState([]);
+    
     const [enrolledCourses, setEnrolledCourses] = useState([]);
     const [selectedCourse, setSelectedCourse] = useState(null);
     const [showDetailsModal, setShowDetailsModal] = useState(false);
@@ -24,8 +35,7 @@ const RecommendationsPage = () => {
 
     // Fetch recommendations from model
     useEffect(() => {
-        if (!currentUser || !student) return;
-
+        if (!currentUser || !student || !courses) return;
         const fetchRecommendations = async () => {
             try {
                 setLoading(true);
@@ -35,7 +45,7 @@ const RecommendationsPage = () => {
                 // TODO: Replace with actual API calls
                 // Profile-based recommendations
                 const profileData = await getRecommendations(token, student.student.id, SEMESTER, TOTAL_RECOMMENDATIONS);
-                
+                console.log('Profile-based recommendations data:', profileData);
                 // Collaborative recommendations
                 // const collabData = await fetch(
                 //     `/api/recommendations/collaborative/${student.student.id}`,
@@ -120,14 +130,14 @@ const RecommendationsPage = () => {
                 ];
 
                 // Mock enrolled courses for graph
-                const mockEnrolled = [
-                    { course_id: 100, course_code: 'CSC00001', course_name: 'Introduction to Programming' },
-                    { course_id: 101, course_code: 'MAT00001', course_name: 'Calculus I' }
-                ];
-
-                setProfileRecommendations(mockProfileBased);
+                // const mockEnrolled = [
+                //     { course_id: 100, course_code: 'CSC00001', course_name: 'Introduction to Programming' },
+                //     { course_id: 101, course_code: 'MAT00001', course_name: 'Calculus I' }
+                // ];
+                const enrolledCourseDetails = courses.filter(c => c.semester == student.student.semester-1);
+                setProfileRecommendations(profileData);
                 setCollaborativeRecommendations(mockCollaborative);
-                setEnrolledCourses(mockEnrolled);
+                setEnrolledCourses(enrolledCourseDetails);
             } catch (err) {
                 console.error('Error fetching recommendations:', err);
                 setError(err.message || 'Failed to fetch recommendations');
@@ -137,7 +147,7 @@ const RecommendationsPage = () => {
         };
 
         fetchRecommendations();
-    }, [currentUser, student]);
+    }, [currentUser, student, courses]);
 
     const handleViewDetails = (course) => {
         setSelectedCourse(course);
@@ -179,7 +189,7 @@ const RecommendationsPage = () => {
     // Filter courses by semester
     const filterCoursesBySemester = (courses) => {
         if (selectedSemester === 0) return courses;
-        return courses.filter(course => course.semester === selectedSemester);
+        return courses.filter(course => course.semester == selectedSemester);
     };
 
     const filteredProfileRecommendations = filterCoursesBySemester(profileRecommendations);

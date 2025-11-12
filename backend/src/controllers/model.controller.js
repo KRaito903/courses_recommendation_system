@@ -24,7 +24,7 @@ export const fetchCourseRecommendations = async (req, res) => {
             };
         });
         console.log('📊 Raw recommendations from model:', result);
-        res.status(200).send({ message: "lấy thành công" });
+        res.status(200).send({ message: "lấy thành công", data: result });
     } catch (error) {
         console.error('❌ Error in fetchCourseRecommendations controller:', error);
         res.status(500).send({ message: 'Lỗi khi lấy đề xuất khóa học.' });

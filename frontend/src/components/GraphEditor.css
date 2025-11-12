@@ -1,0 +1,327 @@
+/* src/components/GraphEditor.css */
+
+.graph-editor-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #f8fafc;
+}
+
+.graph-editor-toolbar {
+    background: white;
+    border-bottom: 2px solid #e2e8f0;
+    padding: 20px;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.toolbar-section {
+    flex: 1;
+    min-width: 250px;
+}
+
+.toolbar-section h3 {
+    margin: 0 0 12px 0;
+    color: #1e293b;
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mode-buttons,
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.mode-btn,
+.action-btn {
+    padding: 10px 16px;
+    border: 2px solid #e2e8f0;
+    background: white;
+    color: #475569;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.mode-btn:hover,
+.action-btn:hover {
+    border-color: #6366f1;
+    background: #f0f4ff;
+    transform: translateY(-2px);
+}
+
+.mode-btn.active {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white;
+    border-color: #6366f1;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.action-btn.save {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border-color: #10b981;
+}
+
+.action-btn.save:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.toolbar-info {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+}
+
+.toolbar-info p {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.toolbar-info strong {
+    color: #1e293b;
+}
+
+.help-text {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    padding: 8px 12px;
+    border-radius: 6px;
+    border-left: 3px solid #f59e0b;
+    font-weight: 600 !important;
+    color: #92400e !important;
+}
+
+.graph-editor-canvas {
+    flex: 1;
+    background: white;
+    position: relative;
+    border-top: 1px solid #e2e8f0;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.graph-editor-canvas canvas {
+    max-width: 100% !important;
+    max-height: 100% !important;
+}
+
+/* Node Modal */
+.node-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999 !important;
+    animation: fadeIn 0.2s ease;
+}
+
+.node-modal {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+    position: relative;
+    z-index: 100000 !important;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.node-modal h2 {
+    margin: 0 0 24px 0;
+    color: #1e293b;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #475569;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.form-group select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23475569' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 40px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+    justify-content: flex-end;
+}
+
+.btn-cancel,
+.btn-save {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-cancel {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.btn-cancel:hover {
+    background: #e2e8f0;
+}
+
+.btn-save {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white;
+}
+
+.btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .graph-editor-toolbar {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .toolbar-section {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .graph-editor-toolbar {
+        padding: 16px;
+    }
+
+    .mode-buttons,
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .mode-btn,
+    .action-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .node-modal {
+        padding: 24px;
+        width: 95%;
+    }
+
+    .node-modal h2 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .toolbar-section h3 {
+        font-size: 0.9rem;
+    }
+
+    .mode-btn,
+    .action-btn {
+        padding: 10px 14px;
+        font-size: 0.85rem;
+    }
+
+    .help-text {
+        font-size: 0.85rem;
+    }
+}
+
+/* Selection indicator */
+.graph-editor-canvas canvas {
+    cursor: default;
+}
+
+.graph-editor-container[data-mode="add-node"] .graph-editor-canvas canvas {
+    cursor: crosshair;
+}
+
+.graph-editor-container[data-mode="delete"] .graph-editor-canvas canvas {
+    cursor: not-allowed;
+}
+
+.graph-editor-container[data-mode="add-edge"] .graph-editor-canvas canvas {
+    cursor: pointer;
+}
