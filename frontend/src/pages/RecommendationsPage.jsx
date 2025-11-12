@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import './RecommendationsPage.css';
-import {getRecommendations } from '../services/recommendationService.js';
+import {getRecommendations, getRecommendationsV2 } from '../services/recommendationService.js';
 
 import { useCourses } from '../context/CoursesContext.jsx';
 
@@ -47,11 +47,8 @@ const RecommendationsPage = () => {
                 const profileData = await getRecommendations(token, student.student.id, SEMESTER, TOTAL_RECOMMENDATIONS);
                 console.log('Profile-based recommendations data:', profileData);
                 // Collaborative recommendations
-                // const collabData = await fetch(
-                //     `/api/recommendations/collaborative/${student.student.id}`,
-                //     { headers: { Authorization: `Bearer ${token}` } }
-                // );
-
+                const collabData = await getRecommendationsV2(token, student.student.id, SEMESTER, TOTAL_RECOMMENDATIONS, student.student.student_major_code);
+                console.log('Collaborative recommendations data:', collabData);
                 // Mock data for development
                 const mockProfileBased = [
                     {

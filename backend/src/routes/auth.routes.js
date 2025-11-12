@@ -2,7 +2,7 @@
 import { Router } from 'express';
 import * as authController from '../controllers/auth.controller.js';
 import { getUser, updateDisplayName } from '../controllers/user.controller.js';
-import { fetchCourseRecommendations } from '../controllers/model.controller.js';
+import { fetchCourseRecommendations, fetchCourseRecommendationsv2 } from '../controllers/model.controller.js';
 // Import middleware
 import { checkAuth } from '../middlewares/checkAuth.js';
 
@@ -20,4 +20,5 @@ router.post('/register-profile', checkAuth, authController.registerProfile);
 router.get('/user', checkAuth, getUser);
 router.put('/user', checkAuth, updateDisplayName);
 router.get('/recommendations', checkAuth, fetchCourseRecommendations);
+router.get('/recommendationsV2', checkAuth, fetchCourseRecommendationsv2);
 export default router;

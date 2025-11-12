@@ -98,6 +98,22 @@ const getAllStudents = async () => {
     }
 };
 
+// get student by major and semester
+const getStudentsByMajorAndSemester = async (major_code, semester) => {
+    try {
+        const querySnapshot = await studentCollection.where('student_major_code', '==', major_code)
+            .where('semester', '==', semester)
+            .get();
+        const students = [];
+        querySnapshot.forEach(doc => {
+            students.push({ id: doc.id, ...doc.data() });
+        });
+        return students[0];
+    } catch (error) {
+        throw new Error('Error getting students by major and semester: ' + error.message);
+    }
+};
+
 // --UPDATE STUDENT--
 
 // Update student by ID
@@ -127,4 +143,4 @@ const deleteStudentById = async (student_id) => {
     }
 };
 
-export { createStudent, getStudentById, updateStudentById, deleteStudentById , getAllStudents, createMultipleStudents, getStudnetByStudentCode };
+export { createStudent, getStudentById, updateStudentById, deleteStudentById , getAllStudents, createMultipleStudents, getStudnetByStudentCode, getStudentsByMajorAndSemester };

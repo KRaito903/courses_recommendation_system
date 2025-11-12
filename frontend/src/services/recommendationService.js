@@ -21,6 +21,19 @@ export async function getRecommendations(token, student_id, semesterFilter = 0, 
     }
 }
 
+export async function getRecommendationsV2(token, student_id, semesterFilter = 0, k = 10, major_code='') {
+    try {
+        console.log('📥 Fetching recommendations for student:', student_id);
+        console.log('📥 Semester filter:', semesterFilter, 'Top K:', k);
+        const response = await get(`/auth/recommendationsV2?student_id=${student_id}&semester_filter=${semesterFilter}&k=${k}&major_code=${major_code}`,token);
+        return response.data;
+    } catch (error) {
+        console.error('❌ Error fetching recommendations:', error);
+        throw new Error(error.response?.data?.message || 'Failed to fetch recommendations');
+    }
+}
+
+
 /**
  * Get user's enrolled courses for graph visualization
  * @param {string} token - JWT token
