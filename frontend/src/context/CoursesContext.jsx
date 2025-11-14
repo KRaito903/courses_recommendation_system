@@ -35,10 +35,10 @@ export const CoursesProvider = ({ children }) => {
         };
 
         fetchCourses();
-    }, [currentUser, student, setCourses]);
+    }, [currentUser, student]);
 
     return (
-        <CoursesContext.Provider value={{ courses, loading, error, setCourses }}>
+        <CoursesContext.Provider value={{ courses, loading, error, setCourses}}>
             {children}
         </CoursesContext.Provider>
     );  

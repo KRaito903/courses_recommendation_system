@@ -99,16 +99,20 @@ const getAllStudents = async () => {
 };
 
 // get student by major and semester
-const getStudentsByMajorAndSemester = async (major_code, semester) => {
+const getStudentsByMajorAndSemester = async (major_code, semester, student_id) => {
     try {
-        const querySnapshot = await studentCollection.where('student_major_code', '==', major_code)
-            .where('semester', '==', semester)
-            .get();
-        const students = [];
-        querySnapshot.forEach(doc => {
-            students.push({ id: doc.id, ...doc.data() });
-        });
-        return students[0];
+        const snapshot = await studentCollection.get();
+        
+        for (const doc of snapshot.docs) {
+            const studentData = doc.data();
+            if (studentData.student_major_code.normalize('NFC') === major_code.normalize('NFC') && 
+            studentData.semester === semester && 
+            doc.id !== String(student_id)) {
+            console.log(`✅ Found student with major_code ${major_code} and semester ${semester}`);
+            return { id: doc.id, ...studentData };
+            }
+        }
+        return null;
     } catch (error) {
         throw new Error('Error getting students by major and semester: ' + error.message);
     }

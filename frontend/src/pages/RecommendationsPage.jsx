@@ -7,14 +7,8 @@ import {getRecommendations, getRecommendationsV2 } from '../services/recommendat
 
 import { useCourses } from '../context/CoursesContext.jsx';
 
-
-//   const mockEnrolled = [
-//                     { course_id: 100, course_code: 'CSC00001', course_name: 'Introduction to Programming' },
-//                     { course_id: 101, course_code: 'MAT00001', course_name: 'Calculus I' }
-//                 ];
-
 const SEMESTER = 0;
-const TOTAL_RECOMMENDATIONS = 12;
+const TOTAL_RECOMMENDATIONS = 10;
 
 const RecommendationsPage = () => {
     const { currentUser, student } = useAuth();
@@ -35,9 +29,10 @@ const RecommendationsPage = () => {
 
     // Fetch recommendations from model
     useEffect(() => {
-        if (!currentUser || !student || !courses) return;
+        if (!currentUser || !student ) return;
         const fetchRecommendations = async () => {
             try {
+                console.log('Fetching recommendations for student:', student);
                 setLoading(true);
                 setError('');
                 const token = await currentUser.getIdToken();
@@ -45,10 +40,10 @@ const RecommendationsPage = () => {
                 // TODO: Replace with actual API calls
                 // Profile-based recommendations
                 const profileData = await getRecommendations(token, student.student.id, SEMESTER, TOTAL_RECOMMENDATIONS);
-                console.log('Profile-based recommendations data:', profileData);
                 // Collaborative recommendations
-                const collabData = await getRecommendationsV2(token, student.student.id, SEMESTER, TOTAL_RECOMMENDATIONS, student.student.student_major_code);
-                console.log('Collaborative recommendations data:', collabData);
+                const collabData = await getRecommendationsV2(token, student.student.id, student.student.semester || 0, TOTAL_RECOMMENDATIONS, student.student.student_major_code);
+                // get enrolled course details
+                const enrolledCourseDetails = courses.filter(c => c.semester == student.student.semester-1);
                 // Mock data for development
                 const mockProfileBased = [
                     {
@@ -127,14 +122,19 @@ const RecommendationsPage = () => {
                 ];
 
                 // Mock enrolled courses for graph
-                // const mockEnrolled = [
-                //     { course_id: 100, course_code: 'CSC00001', course_name: 'Introduction to Programming' },
-                //     { course_id: 101, course_code: 'MAT00001', course_name: 'Calculus I' }
-                // ];
-                const enrolledCourseDetails = courses.filter(c => c.semester == student.student.semester-1);
+                const mockEnrolled = [
+                    { course_id: 100, course_code: 'CSC00001', course_name: 'Introduction to Programming' },
+                    { course_id: 101, course_code: 'MAT00001', course_name: 'Calculus I' }
+                ];
+
+
+                // setProfileRecommendations(mockProfileBased);
+                // setCollaborativeRecommendations(mockCollaborative);
+                // setEnrolledCourses(mockEnrolled);
+
                 setProfileRecommendations(profileData);
-                setCollaborativeRecommendations(mockCollaborative);
-                setEnrolledCourses(enrolledCourseDetails);
+                setCollaborativeRecommendations(collabData);
+                setEnrolledCourses(enrolledCourseDetails.length ? enrolledCourseDetails : []);
             } catch (err) {
                 console.error('Error fetching recommendations:', err);
                 setError(err.message || 'Failed to fetch recommendations');
@@ -185,7 +185,7 @@ const RecommendationsPage = () => {
 
     // Filter courses by semester
     const filterCoursesBySemester = (courses) => {
-        if (selectedSemester === 0) return courses;
+        if (selectedSemester == 'all' || selectedSemester == 0) return courses;
         return courses.filter(course => course.semester == selectedSemester);
     };
 

@@ -12,7 +12,6 @@ import { get, put, post, del } from '../utils/apiClient.js';
 export async function getRecommendations(token, student_id, semesterFilter = 0, k = 10) {
     try {
         console.log('📥 Fetching recommendations for student:', student_id);
-        console.log('📥 Semester filter:', semesterFilter, 'Top K:', k);
         const response = await get(`/auth/recommendations?student_id=${student_id}&semester_filter=${semesterFilter}&k=${k}`,token);
         return response.data;
     } catch (error) {
@@ -23,8 +22,7 @@ export async function getRecommendations(token, student_id, semesterFilter = 0, 
 
 export async function getRecommendationsV2(token, student_id, semesterFilter = 0, k = 10, major_code='') {
     try {
-        console.log('📥 Fetching recommendations for student:', student_id);
-        console.log('📥 Semester filter:', semesterFilter, 'Top K:', k);
+        console.log('📥 Fetching recommendations for student based on collaborative filtering:', student_id);
         const response = await get(`/auth/recommendationsV2?student_id=${student_id}&semester_filter=${semesterFilter}&k=${k}&major_code=${major_code}`,token);
         return response.data;
     } catch (error) {

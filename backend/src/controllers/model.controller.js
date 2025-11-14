@@ -13,7 +13,7 @@ export const fetchCourseRecommendations = async (req, res) => {
         if (!student_id) {
             return res.status(400).send({ message: 'Thiếu student_id trong yêu cầu.' });
         }
-        const recommendations = await getRecommendations(student_id, semester_filter || 0, k || 10);
+        const recommendations = await getRecommendations(student_id, 0, k || 10);
         const courseMap = getCourseMap();
        
         const result = JSON.parse(recommendations).map(rec => {
@@ -38,10 +38,14 @@ export const fetchCourseRecommendations = async (req, res) => {
 
 // Fetch based on other person ality traits
 export const fetchCourseRecommendationsv2 = async (req, res) => {
-     const { student_id, semester_filter, k , major_code} = req.query;
     try {
-        console.log('📥 Received recommendation v2 request for student_id:', student_id, 'semester filter:', semester_filter, 'major_code:', major_code);
-        const studentRecommandations = await getStudentsByMajorAndSemester(major_code, semester_filter);
+        const { student_id, semester_filter, k , major_code} = req.query;
+        console.log('📥 Received v2 recommendation request for student_id:', student_id, 'semester filter:', semester_filter, 'major_code:', major_code);
+        if (!student_id || !major_code || !semester_filter ) {
+            return res.status(400).send({ message: 'Thiếu student_id hoặc major_code hoặc semester_filter trong yêu cầu.' });
+        }
+        const studentRecommandations = await getStudentsByMajorAndSemester(major_code, semester_filter, student_id);
+        console.log('🔍 Found student for recommendations:', studentRecommandations);
         if (!studentRecommandations || !studentRecommandations.id) {
             const listEnrollments = await getAllEnrollments();
             const countCourses = {};
@@ -74,11 +78,11 @@ export const fetchCourseRecommendationsv2 = async (req, res) => {
                     course_code: courseDetails.course_code || 'N/A'
                 };
             });
-            console.log('📊 Fallback popular courses recommendations:', result);
-            return res.status(200).send({ message: "lấy thành công 10 môn học phổ biến", data: {} });
+            console.log('📊 Fallback popular courses recommendations');
+            return res.status(200).send({ message: "lấy thành công 10 môn học phổ biến", data: result });
         }
         // If exist student we will use his id to get recommandation
-        const recommandations = await getRecommendations(studentRecommandations.id, semester_filter || 0, k || 10);
+        const recommandations = await getRecommendations(studentRecommandations.id, 0, k || 10);
         const courseMap = getCourseMap();
         const result = JSON.parse(recommandations).map(rec => {
             const courseDetails = courseMap[rec.course_id] || {};
@@ -93,7 +97,7 @@ export const fetchCourseRecommendationsv2 = async (req, res) => {
                 course_code: courseDetails.course_code || 'N/A'
             };
         });
-        // console.log('📊 Raw recommendations v2 from model:', result);
+        console.log('📊 Raw recommendations v2 from model (based on other personality traits):', result);
         res.status(200).send({ message: "lấy thành công hồ sơ sinh viên tương tự", data: result });
     } catch (error) {   
         console.error('❌ Error in fetchCourseRecommendationsv2 controller:', error);   
