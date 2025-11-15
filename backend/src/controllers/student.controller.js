@@ -3,6 +3,9 @@ import { createStudent, getStudentById, updateStudentById, deleteStudentById , g
 
 
 class StudentController {
+    constructor() {
+        this.repository = null;
+    }
     // Creat new student when resigning
     async createStudent(req, res, next) {
         try {

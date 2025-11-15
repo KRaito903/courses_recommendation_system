@@ -4,6 +4,8 @@ import { checkAuth } from "../middlewares/checkAuth.js";
 
 const studentRouter = Router();
 
+
+
 studentRouter.get("/", StudentController.getAllStudents);
 studentRouter.get("/:id", StudentController.getStudentById);
 studentRouter.post("/", StudentController.createStudent);
