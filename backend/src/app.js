@@ -22,9 +22,9 @@ const courseMap = await mapCourseIdstoCourse();
 setCourseMap(courseMap);
 
 // Set up admin role on server start
-// setUpRole(process.env.ADMIN_UID, 'admin').catch((error) => {
-//     console.error('Failed to set up admin role:', error);
-// });
+setUpRole(process.env.ADMIN_UID, 'admin').catch((error) => {
+    console.error('Failed to set up admin role:', error);
+});
 
 
 // Middleware
